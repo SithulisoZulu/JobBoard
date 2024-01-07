@@ -1,0 +1,135 @@
+---
+import TabsButton from "./ui/TabsButton.astro";
+import Link from "./ui/Link.astro";
+---
+
+<div class="b border-gray-200 px-4 flex justify-center">
+    <nav class="flex space-x-2" aria-label="Tabs" role="tablist">
+        <TabsButton text='Job feed' tab="#basic-tabs-1"  active={true}/>
+        <TabsButton text='Saved jobs' tab="#basic-tabs-2" active={false} />
+      <hr>
+    </nav>
+</div>
+  
+<div class="mt-3 p-4">
+    <div id="basic-tabs-1" role="tabpanel" aria-labelledby="basic-tabs-item-1">
+        <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto ">
+            <div class="grid md:grid-cols-2 items-center gap-12 shawdow-md">
+                <div class="flex flex-col top-0">
+                    <a href="/someid" class="border active p-4 rounded-lg mb-3">
+                        <div class="flex flex-row">
+                            <div class="text-rose-800 bg-rose-700 bg-opacity-30 rounded-lg text-sm font-bold p-1 w-auto px-3 shadow-md">
+                                Urgently hiring
+                            </div>
+                            <div class="ms-34 grid items-center justify-items-end w-auto">
+                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <h1 class="font-semibold capitalize mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, tempora.</h1>
+
+                        <h6 class="mt-2"> Lorem ipsum dolor sit.</h6>
+                        <h6 class="mt-1"> Lorem ipsum dolor sit.</h6>
+
+                        <div class="flex flex-row">
+                            <div class="mt-2 text-green-800 bg-green-700 bg-opacity-30 rounded-lg text-sm font-bold p-1 w-auto px-3 shadow-md">
+                                R20 000 a month <i class="fa fa-heart"></i>
+                            </div>
+
+                            <div class="mt-2 ms-3 text-green-800 bg-green-700 bg-opacity-30 rounded-lg text-sm font-bold p-1 w-auto px-3 shadow-md">
+                                Full-time <i class="fa fa-heart"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-2 flex flex-row align-middle items-center">
+                            <i class="fa fa-paper-plane text-blue-500" aria-hidden="true"></i> <span class="ms-2">Easily Apply</span>
+                        </div>
+
+                        <div class="inline-flex items-center mt-3">
+                            <span class="w-2 h-2 inline-block bg-gray-500 rounded-full me-2"></span>
+                            <span class="text-gray-600 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias blanditiis itaque molestiae, expedita repellendus iste, soluta ut excepturi laudantium necessitatibus eius a aliquid vel rerum omnis nihil, corrupti vero ab?</span>
+                        </div>
+
+                        <span class="text-sm text-gray-600">Posted 30+ dats ago</span>
+                    </a>
+                </div>
+                <div class="border rounded-lg">
+                    <div class="shadow-md p-3">
+                        <h1 class="font-semibold capitalize mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, tempora.</h1>
+                        <div class="mt-2">
+                            <i class="ri-building-line text-black"></i>
+                            <Link text="Dut Appfactory" href="/Company/somecompany"/>
+                        </div>
+                        <div class="mt-2">
+                            <i class="bi bi-geo-alt "></i>
+                            <span class="text-small text-gray-600"> Lorem ipsum dolor sit.</span>
+                        </div>
+                        <div class="mt-2">
+                            <span class="text-small text-gray-900">R20 000 a month - Full-time</span>
+                        </div>
+    
+                        <div class="flex flex-row mt-2">
+    
+                            <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 me-2">
+                                Apply now
+                            </button>
+    
+                            <button type="button" class="flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] text-sm font-semibold rounded-lg border border-transparent bg-gray-400 text-white hover:bg-gray-500 disabled:opacity-50 disabled:pointer-events-none me-2">
+                                <i class="ri-bookmark-line text-lg"></i>
+                            </button>
+    
+                            <button type="button" class="flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] text-sm font-semibold rounded-lg border border-transparent bg-gray-400 text-white hover:bg-gray-500 disabled:opacity-50 disabled:pointer-events-none">
+                                <i class="ri-spam-2-line text-lg"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="overflow-y-scroll h-auto">
+                        <div class="mt-2 p-3  border-b">
+                            <h1 class="font-semibold capitalize mt-2">Job details</h1>
+                            <div class="mt-2">
+                                <i class="bi bi-cash"></i>
+                                <span class="text-small font-semibold text-gray-900">Pay</span>
+    
+                                <div class="flex flex-row">
+                                    <div class="mt-2 ms-4 text-green-800 bg-green-700 bg-opacity-20 rounded-md text-sm font-bold p-1 w-auto px-3 shadow-md">
+                                        R20 000 a month <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <i class="ri-suitcase-line"></i>
+                                <span class="text-small font-semibold text-gray-900">Job type</span>
+    
+                                <div class="flex flex-row">
+                                    <div class="mt-2 ms-4 text-green-800 bg-green-700 bg-opacity-20 rounded-md text-sm font-bold p-1 w-auto px-3 shadow-md">
+                                        R20 000 a month <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2 p-3  border-b">
+                            <h1 class="font-semibold capitalize mt-2">Location</h1>
+                            <div class="mt-2">
+                                <i class="bi bi-cash"></i>
+                                <span class="text-small font-semibold text-gray-900">Pay</span>
+    
+                                <div class="flex flex-row">
+                                    <div class="mt-2 ms-4 text-green-800 bg-green-700 bg-opacity-20 rounded-md text-sm font-bold p-1 w-auto px-3 shadow-md">
+                                        R20 000 a month <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="basic-tabs-2" class="hidden" role="tabpanel" aria-labelledby="basic-tabs-item-2">
+      <p class="max-w-[90rem] px-4 sm:px-6 lg:px-8 lg:py-14 mx-auto   bg-rose-600">
+        This is the <em class="font-semibold text-gray-800 dark:text-gray-200">second</em> item's tab body.
+      </p>
+    </div>
+    
+</div>

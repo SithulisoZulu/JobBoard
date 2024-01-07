@@ -1,0 +1,15 @@
+---
+import Header from '../components/admin/Header.astro'
+import SideBar from '../components/admin/SideBar.astro'
+import SideBarToggle from '../components/admin/SideBarToggle.astro'
+---
+
+<body class="bg-gray-50 dark:bg-slate-900">
+    <Header />
+    <SideBarToggle />
+    <SideBar />
+
+    <slot>
+
+    <script src="../../node_modules/preline/dist/preline.js"></script>
+</body>
