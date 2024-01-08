@@ -1,0 +1,39 @@
+---
+const { job } = Astro.props
+---
+
+<a href={`/Details/${job.id}`} target="_blank" class="border active p-4 rounded-lg mb-3 card transition-all ease-in-out duration-300">
+    <div class="flex flex-row">
+        <div class="text-rose-800 bg-rose-700 bg-opacity-30 rounded-lg text-sm font-bold p-1 w-auto px-3 shadow-md">
+            Urgently hiring
+        </div>
+        <div class="ms-34 grid items-center justify-items-end w-auto">
+            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+        </div>
+    </div>
+    <h1 class="font-semibold capitalize mt-2">{job.title}</h1>
+
+    <h6 class="mt-2"> Lorem ipsum dolor sit.</h6>
+    <h6 class="mt-1"> Lorem ipsum dolor sit.</h6>
+
+    <div class="flex flex-row">
+        <div class="mt-2 text-green-800 bg-green-700 bg-opacity-30 rounded-lg text-sm font-bold p-1 w-auto px-3 shadow-md">
+            R20 000 a month <i class="fa fa-heart"></i>
+        </div>
+
+        <div class="mt-2 ms-3 text-green-800 bg-green-700 bg-opacity-30 rounded-lg text-sm font-bold p-1 w-auto px-3 shadow-md">
+            Full-time <i class="fa fa-heart"></i>
+        </div>
+    </div>
+    
+    <div class="mt-2 flex flex-row align-middle items-center">
+        <i class="fa fa-paper-plane text-blue-500" aria-hidden="true"></i> <span class="ms-2">Easily Apply</span>
+    </div>
+
+    <div class="inline-flex items-center mt-3">
+        <span class="w-2 h-2 inline-block bg-gray-500 rounded-full me-2"></span>
+        <span class="text-gray-600 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias blanditiis itaque molestiae, expedita repellendus iste, soluta ut excepturi laudantium necessitatibus eius a aliquid vel rerum omnis nihil, corrupti vero ab?</span>
+    </div>
+
+    <span class="text-sm text-gray-600">Posted 30+ dats ago</span>
+</a>
