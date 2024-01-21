@@ -18,7 +18,8 @@ interface Job {
   qualification: string;
   refNo        : string;
   salary       : string;
-  title        : string
+  title        : string;
+  isUrgent     : boolean
 }
 
 const db = getFirestore(app);

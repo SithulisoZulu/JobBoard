@@ -1,0 +1,102 @@
+---
+import { app } from "../../firebase/server";
+import { getFirestore } from "firebase-admin/firestore";
+
+import Layout from "@layouts/Layout.astro";
+import SearchInput from "@components/SearchInput.astro";
+import Link from "@components/ui/Link.astro";
+
+
+const { id } = Astro.params;
+
+if (!id) 
+{
+    return Astro.redirect("/404")
+}
+
+const db = getFirestore(app);
+const PostsRef = db.collection("Posts");
+const PostsSnapshot = await PostsRef.doc(id).get();
+
+if (!PostsSnapshot.exists) {
+  return Astro.redirect("/404");
+}
+
+const Job = PostsSnapshot.data();
+
+---
+
+
+<Layout title={Job!.title}>
+
+    <SearchInput />
+
+    <div class="px-4 sm:px-3 lg:px-8">
+        <div class="border rounded-lg max-w-[50rem] mx-auto mb-4">
+            <div class="shadow-md p-3" >
+                <h1 class="font-semibold capitalize mt-2">{Job!.title}</h1>
+                <div class="mt-2">
+                    <i class="ri-building-line text-black"></i>
+                    <Link text="Dut Appfactory" href="/Company/somecompany"/>
+                </div>
+                <div class="mt-2">
+                    <i class="bi bi-geo-alt "></i>
+                    <span class="text-small text-gray-600">{Job!.center}</span>
+                </div>
+                <div class="mt-2">
+                    <span class="text-small text-gray-900">{Job!.salary} - Full-time</span>
+                </div>
+
+                <div class="flex flex-row mt-2">
+
+                    <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 me-2">
+                        Apply now
+                    </button>
+
+                    <button type="button" class="flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] text-sm font-semibold rounded-lg border border-transparent bg-gray-400 text-white hover:bg-gray-500 disabled:opacity-50 disabled:pointer-events-none me-2">
+                        <i class="ri-bookmark-line text-lg"></i>
+                    </button>
+
+                    <button type="button" class="flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] text-sm font-semibold rounded-lg border border-transparent bg-gray-400 text-white hover:bg-gray-500 disabled:opacity-50 disabled:pointer-events-none">
+                        <i class="ri-spam-2-line text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="h-auto">
+                <div class="mt-2 p-3 border-b">
+                    <h1 class="font-semibold capitalize mt-2">Job details</h1>
+                    <div class="mt-2">
+                        <i class="bi bi-cash"></i>
+                        <span class="text-small font-semibold text-gray-900">Pay</span>
+
+                        <div class="flex flex-row">
+                            <div class="mt-2 ms-4 text-green-800 bg-green-700 bg-opacity-20 rounded-md text-sm font-bold p-1 w-auto px-3 shadow-md">
+                               {Job!.salary} <i class="fa fa-check"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <i class="ri-suitcase-line"></i>
+                        <span class="text-small font-semibold text-gray-900">Job type</span>
+
+                        <div class="flex flex-row">
+                            <div class="mt-2 ms-4 text-green-800 bg-green-700 bg-opacity-20 rounded-md text-sm font-bold p-1 w-auto px-3 shadow-md">
+                                R20 000 a month <i class="fa fa-check"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2 p-3 border-b">
+                    <h1 class="font-semibold capitalize mt-2">Location</h1>
+                    <div class="mt-2">
+                        <i class="ri-map-pin-line"></i><label class="ms-5">{Job!.center}</label>
+                    </div>
+                </div>
+                <div class="mt-2 p-3 ">
+                    <p>{Job!.duties}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>   

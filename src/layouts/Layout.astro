@@ -1,6 +1,9 @@
 ---
 import NavBar from '../components/NavBar.astro';
 import Footer from '../components/Footer.astro';
+import Cookies from '../components/Cookies.astro';
+import BackToTop from '../components/ui/BackToTop.astro';
+import LoginModal from '@components/LoginModal.astro';
 // import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
@@ -8,18 +11,25 @@ interface Props {
 }
 
 const { title } = Astro.props;
+
+const user = ''
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 
+
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" href="/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png"  href="/favicon/favicon-16x16.png">
+		<link rel="manifest" href="/favicon/site.webmanifest">
 		<!-- <ViewTransitions /> -->
 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -29,67 +39,21 @@ const { title } = Astro.props;
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.0.1/remixicon.css">
 
 	</head>
-	<body class="dark:bg-[#13151a] scroll-smooth">
-		<NavBar />
+	<body class="dark:bg-[#13151a]">
+		<NavBar
+			user={user}
+		/>
 
 		<slot />
 
 		<Footer />
 		
+		<Cookies />
+
+		<BackToTop />
+
+		<LoginModal />
+
 		<script src="../../node_modules/preline/dist/preline.js"></script>
 	</body>
 </html>
-<!-- 
-<script >
-
-	const searchInput = document.getElementById("search");
-  
-	if (searchInput) {
-	searchInput.addEventListener("input", (e: Event) => {
-		const target = e.target as HTMLInputElement | null;
-  
-		if (target) {
-			const searchValue = target.value.toLowerCase();
-			const cards = document.querySelectorAll(".cards .card");
-			
-			cards.forEach(card => {
-				const h1 = card.querySelector("h1");
-				if(h1)
-				{
-					const h1Text = h1.innerText.toLowerCase(); 
-
-					const cardElement = card as HTMLElement;
-
-					if (h1Text.includes(searchValue)) {
-                    cardElement.style.display = "block";
-                } else {
-                    cardElement.style.display = "none";
-                }
-				}
-			})
-		}
-
-		
-        // Check if there are no matching cards and display the message
-        const matchingCards = document.querySelectorAll(".cards .card[style='display: block;']");
-        if (matchingCards.length === 0) {
-            // Create and append the message div
-            if (!messageContainer) {
-                const messageDiv = document.createElement("div");
-                messageDiv.classList.add("message-container");
-                messageDiv.textContent = "Nothing Found! 😥 ";
-
-                // Add or remove the specified classes
-                messageDiv.classList.add("card", "border", "bg-transparent", "rounded-3", "mt-3", "-50","sticky-bottom");
-
-                document.querySelector(".cards").appendChild(messageDiv);
-            }
-        } else {
-            // If matching cards are found, hide the message
-            if (messageContainer) {
-                messageContainer.remove();
-            }
-        }
-	});
-  }  
-</script> -->

@@ -1,10 +1,9 @@
 ---
-import TabsButton from "./ui/TabsButton.astro";
-import Link from "./ui/Link.astro";
+import TabsButton from "@components/ui/TabsButton.astro";
 
 import { AllJobs } from '../pages/api/jobs/posts'
-import JobCard from "./JobCard.astro";
-import Pagination from "./Pagination.astro";
+import JobCard from "@components/JobCard.astro";
+import Pagination from "@components/Pagination.astro";
 
 import { JOBS_PER_PAGE } from '../constants'
 
@@ -30,7 +29,7 @@ const  JobsForPage = JobPosts.slice((currentPage - 1) * JOBS_PER_PAGE, currentPa
     <div id="basic-tabs-1" role="tabpanel" aria-labelledby="basic-tabs-item-1">
         <div class="max-w-[85rem] px-4 py-10  lg:px-8 mx-auto ">
             <div class="items-center gap-12 shawdow-md">
-                <div class="flex flex-col cards transition-all ease-in-out duration-300  max-w-[50rem] px-4 sm:px-3 lg:px-8 mx-auto">
+                <div class="flex flex-col transition-all ease-in-out duration-300  max-w-[50rem] px-4 sm:px-3 lg:px-8 mx-auto">
                     {
                         JobsForPage.map(job =>
                             (
@@ -41,85 +40,14 @@ const  JobsForPage = JobPosts.slice((currentPage - 1) * JOBS_PER_PAGE, currentPa
 
                     <Pagination  currentPage={currentPage} totalPages={totalPages} disableNext={currentPage === totalPages} disablePrevious={currentPage === 1}/>
                 </div>
-                <!-- <div class="border rounded-lg hidden">
-                    <div class="shadow-md p-3" >
-                        <h1 class="font-semibold capitalize mt-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, tempora.</h1>
-                        <div class="mt-2">
-                            <i class="ri-building-line text-black"></i>
-                            <Link text="Dut Appfactory" href="/Company/somecompany"/>
-                        </div>
-                        <div class="mt-2">
-                            <i class="bi bi-geo-alt "></i>
-                            <span class="text-small text-gray-600"> Lorem ipsum dolor sit.</span>
-                        </div>
-                        <div class="mt-2">
-                            <span class="text-small text-gray-900">R20 000 a month - Full-time</span>
-                        </div>
-    
-                        <div class="flex flex-row mt-2">
-    
-                            <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 me-2">
-                                Apply now
-                            </button>
-    
-                            <button type="button" class="flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] text-sm font-semibold rounded-lg border border-transparent bg-gray-400 text-white hover:bg-gray-500 disabled:opacity-50 disabled:pointer-events-none me-2">
-                                <i class="ri-bookmark-line text-lg"></i>
-                            </button>
-    
-                            <button type="button" class="flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] text-sm font-semibold rounded-lg border border-transparent bg-gray-400 text-white hover:bg-gray-500 disabled:opacity-50 disabled:pointer-events-none">
-                                <i class="ri-spam-2-line text-lg"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="overflow-y-scroll h-auto">
-                        <div class="mt-2 p-3  border-b">
-                            <h1 class="font-semibold capitalize mt-2">Job details</h1>
-                            <div class="mt-2">
-                                <i class="bi bi-cash"></i>
-                                <span class="text-small font-semibold text-gray-900">Pay</span>
-    
-                                <div class="flex flex-row">
-                                    <div class="mt-2 ms-4 text-green-800 bg-green-700 bg-opacity-20 rounded-md text-sm font-bold p-1 w-auto px-3 shadow-md">
-                                        R20 000 a month <i class="fa fa-check"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-2">
-                                <i class="ri-suitcase-line"></i>
-                                <span class="text-small font-semibold text-gray-900">Job type</span>
-    
-                                <div class="flex flex-row">
-                                    <div class="mt-2 ms-4 text-green-800 bg-green-700 bg-opacity-20 rounded-md text-sm font-bold p-1 w-auto px-3 shadow-md">
-                                        R20 000 a month <i class="fa fa-check"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-2 p-3  border-b">
-                            <h1 class="font-semibold capitalize mt-2">Location</h1>
-                            <div class="mt-2">
-                                <i class="bi bi-cash"></i>
-                                <span class="text-small font-semibold text-gray-900">Pay</span>
-    
-                                <div class="flex flex-row">
-                                    <div class="mt-2 ms-4 text-green-800 bg-green-700 bg-opacity-20 rounded-md text-sm font-bold p-1 w-auto px-3 shadow-md">
-                                        R20 000 a month <i class="fa fa-check"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
 
     <div id="basic-tabs-2" class="hidden" role="tabpanel" aria-labelledby="basic-tabs-item-2">
-      <p class="max-w-[90rem] px-4 sm:px-6 lg:px-8 lg:py-14 mx-auto   bg-rose-600">
-        This is the <em class="font-semibold text-gray-800 dark:text-gray-200">second</em> item's tab body.
+      <p class="max-w-[85rem] px-4 py-10  lg:px-8 mx-auto ">
+       More code coming here
       </p>
     </div>
     
 </div>
-

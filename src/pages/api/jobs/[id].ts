@@ -1,55 +1,22 @@
-import type { APIRoute } from "astro";
 import { getFirestore } from "firebase-admin/firestore";
 import { app } from "../../../firebase/server";
+import type { APIRoute } from "astro";
 
-const db = getFirestore(app);
-const friendsRef = db.collection("Posts");
+export const GET: APIRoute = async () => {
+  // process the URL into a more usable format
+  // const url = new URL(request.url)
+  // const params = new URLSearchParams(url.search)
 
-export const POST: APIRoute = async ({ params, redirect, request }) => {
-  const formData = await request.formData();
-  const name = formData.get("name")?.toString();
-  const age = formData.get("age")?.toString();
-  const isBestFriend = formData.get("isBestFriend") === "on";
+  // // set up a response object
+  // const data = {
+  //   hello: params.get('id'),
+  // };
 
-  if (!name || !age) {
-    return new Response("Missing required fields", {
-      status: 400,
-    });
-  }
-
-  if (!params.id) {
-    return new Response("Cannot find friend", {
-      status: 404,
-    });
-  }
-
-  try {
-    await friendsRef.doc(params.id).update({
-      name,
-      age: parseInt(age),
-      isBestFriend,
-    });
-  } catch (error) {
-    return new Response("Something went wrong", {
-      status: 500,
-    });
-  }
-  return redirect("/somepage");
-};
-
-export const DELETE: APIRoute = async ({ params, redirect }) => {
-  if (!params.id) {
-    return new Response("Cannot find friend", {
-      status: 404,
-    });
-  }
-
-  try {
-    await friendsRef.doc(params.id).delete();
-  } catch (error) {
-    return new Response("Something went wrong", {
-      status: 500,
-    });
-  }
-  return redirect("/nomayin");
-};
+  // this will yield { hello: 'meow' } on your Astro server console
+  console.log('Hello')
+  
+  // return the response
+  return new Response(JSON.stringify('hello'), {
+    status: 200
+  }); 
+}

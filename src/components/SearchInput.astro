@@ -1,3 +1,7 @@
+---
+import Input from '@components/ui/Input.astro'
+import Button from '@components/ui/Button.astro'
+---
 
 <div class="max-w-[50rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto mt-10 " >
   <form id="search-form" action="/search">
@@ -5,13 +9,14 @@
         <div class="w-full">
           <label for="search" class="sr-only">Search</label>
             <div class="flex flex-row">
-              <input type="text" id="query" name="query" class="py-3 px-4 block w-full border-transparent rounded-lg text-semibold focus:ring-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none me-2" placeholder="Job title, Keywords" required>
-              <input type="text" id="location" name="location" class="py-3 px-4 block w-full border-transparent rounded-lg text-semibold focus:ring-blue-500 focus:ring-0 disabled:opacity-50 disabled:pointer-events-none" placeholder='City, state, zip code or "remote"' required>
+
+              <Input type="text" id="queary" name="query" placeholder='Job title, Keywords' required />
+
+              <Input type="text" id="location" name="location" placeholder='City, state, zip code or "remote"' required />
+
             </div>
         </div>
-        <button type="submit" class="w-full sm:w-auto whitespace-nowrap p-3 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" >
-          Find jobs
-        </button>
+        <Button type="submit">Find jobs</Button>
       </div>
     </form>
 </div>

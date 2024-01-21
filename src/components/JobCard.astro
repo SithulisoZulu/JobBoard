@@ -1,39 +1,59 @@
 ---
 const { job } = Astro.props
 ---
-
-<a href={`/Details/${job.id}`} target="_blank" class="border active p-4 rounded-lg mb-3 card transition-all ease-in-out duration-300">
-    <div class="flex flex-row">
-        <div class="text-rose-800 bg-rose-700 bg-opacity-30 rounded-lg text-sm font-bold p-1 w-auto px-3 shadow-md">
-            Urgently hiring
+<div class="relative border active p-4 rounded-lg mb-3 z-40 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400">
+    <a href={`/jobs/${job.id}`} target="_blank" class="z-10">
+        <div class="flex flex-row">
+            <div class={`text-rose-800 bg-rose-700 bg-opacity-30 rounded-lg text-sm font-bold p-1 w-auto px-3 shadow-md ${job.isUrgent !== true ? 'hidden' : ''}`}>
+                Urgently hiring 
+            </div>
         </div>
-        <div class="ms-34 grid items-center justify-items-end w-auto">
-            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-        </div>
-    </div>
-    <h1 class="font-semibold capitalize mt-2">{job.title}</h1>
-
-    <h6 class="mt-2"> Lorem ipsum dolor sit.</h6>
-    <h6 class="mt-1"> Lorem ipsum dolor sit.</h6>
-
-    <div class="flex flex-row">
-        <div class="mt-2 text-green-800 bg-green-700 bg-opacity-30 rounded-lg text-sm font-bold p-1 w-auto px-3 shadow-md">
-            R20 000 a month <i class="fa fa-heart"></i>
-        </div>
-
-        <div class="mt-2 ms-3 text-green-800 bg-green-700 bg-opacity-30 rounded-lg text-sm font-bold p-1 w-auto px-3 shadow-md">
-            Full-time <i class="fa fa-heart"></i>
-        </div>
-    </div>
+        <h1 class="font-semibold text-lg capitalize mt-2">{job.title}</h1>
     
-    <div class="mt-2 flex flex-row align-middle items-center">
-        <i class="fa fa-paper-plane text-blue-500" aria-hidden="true"></i> <span class="ms-2">Easily Apply</span>
-    </div>
+        <h6 class="mt-2">{job.poster}</h6>
+        <h6 class="mt-1">{job.center}</h6>
+    
+        <div class="flex flex-row">
+            <div class="mt-2 text-green-800 bg-green-700 bg-opacity-30 rounded-lg text-sm font-bold p-1 w-auto px-3 shadow-md">
+               {job.salary} <i class="fa fa-heart"></i>
+            </div>
+    
+            <div class="mt-2 ms-3 text-green-800 bg-green-700 bg-opacity-30 rounded-lg text-sm font-bold p-1 w-auto px-3 shadow-md">
+                Full-time <i class="fa fa-heart"></i>
+            </div>
+        </div>
+        
+        <div class="mt-2 flex flex-row align-middle items-center">
+            <i class="fa fa-paper-plane text-blue-500" aria-hidden="true"></i> <span class="ms-2">Easily Apply</span>
+        </div>
+    
+        <div class="inline-flex items-center mt-3">
+            <span class="w-2 h-2 inline-block bg-gray-500 rounded-full me-2"></span>
+            <span class="text-gray-600 dark:text-gray-400">{job.duties}</span>
+        </div>
+    
+        <span class="text-sm text-gray-600">{job.date}</span>
+    
+    </a>
 
-    <div class="inline-flex items-center mt-3">
-        <span class="w-2 h-2 inline-block bg-gray-500 rounded-full me-2"></span>
-        <span class="text-gray-600 dark:text-gray-400">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias blanditiis itaque molestiae, expedita repellendus iste, soluta ut excepturi laudantium necessitatibus eius a aliquid vel rerum omnis nihil, corrupti vero ab?</span>
+    <div  class="absolute top-0 right-0 ms-34 ">
+        <div class="hs-dropdown relative inline-flex">
+            <button id="hs-dropdown-default" type="button" class="grid items-center justify-items-end w-auto ms-16 z-50 me-5 mt-5 py-3 px-4 hover:bg-blue-300 rounded-lg transition-all ease-in-out duration-300">
+                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            </button>
+          
+            <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-gray-800 dark:border dark:border-gray-700 dark:divide-gray-700 after:h-4 after:absolute after:-bottom-4 after:start-0 after:w-full before:h-4 before:absolute before:-top-4 before:start-0 before:w-full ms-6" aria-labelledby="hs-dropdown-default">
+              <a href={`/Delete/${job.id}`}  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
+                <i class="ri-bookmark-line text-xl"></i> Save job
+              </a>
+              <a href={`/Report/${job.id}`}  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
+                <i class="ri-flag-fill text-xl"></i> Report job
+              </a>
+              <a href={`/job/${job.id}`} target="_blank" class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-blue-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
+                <i class="fa fa-paper-plane text-blue-500" aria-hidden="true"></i> Apply now
+              </a>
+            </div>
+          </div>
+        
     </div>
-
-    <span class="text-sm text-gray-600">Posted 30+ dats ago</span>
-</a>
+</div>

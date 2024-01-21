@@ -1,7 +1,10 @@
 ---
-import Link from '../components/ui/Link.astro'
-import IconLink from '../components/ui/IconLink.astro'
-import Logo from '../components/site/Logo.astro';
+import Link from '@components/ui/Link.astro'
+import IconLink from '@components/ui/IconLink.astro'
+import Logo from '@components/site/Logo.astro';
+
+
+const { user } = Astro.props
 ---
 <!-- ========== HEADER ========== -->
 <header class="top-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full text-sm pb-10 fixed">
@@ -19,8 +22,9 @@ import Logo from '../components/site/Logo.astro';
       <div id="navbar-collapse-with-animation" class="hs-collapse hidden overflow-hidden transition-all md:justify-start duration-300 basis-full grow md:block">
         <div class="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:ps-7">
           <Link href="/" text="home" />
-          <Link href="/" text="Company Reviews" />
-          <Link href="/" text="Find Salaries" />
+          <Link href="/" text="About" />
+          <!-- <Link href="/" text="Company Reviews" />
+          <Link href="/" text="Find Salaries" /> -->
 
         </div>
       </div>
@@ -29,17 +33,19 @@ import Logo from '../components/site/Logo.astro';
       <div id="navbar-collapse-with-animation" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block">
         <div class="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:ps-7">
 
-          <IconLink href="/" > <i class="fa-solid fa-message"></i> </IconLink>
+          {user ? <IconLink href="/" > <i class="fa-solid fa-message"></i> </IconLink> : ''}
 
-          <IconLink href="/" >
-            <i class="fa fa-bell relative" aria-hidden="true">
-              <span class="animate-ping transition-all ease-in-out duration-300 absolute -top-1 -end-1 inline-flex items-center w-2.5 h-2.5 rounded-full border-2 border-white text-xs font-medium bg-teal-500 text-white">
-                <span class="sr-only">Badge value</span>
-              </span>
-            </i>
-          </IconLink>
+          {user ? 
+            <IconLink href="/" >
+              <i class="fa fa-bell relative" aria-hidden="true">
+                <span class="animate-ping transition-all ease-in-out duration-300 absolute -top-1 -end-1 inline-flex items-center w-2.5 h-2.5 rounded-full border-2 border-white text-xs font-medium bg-teal-500 text-white">
+                  <span class="sr-only">Badge value</span>
+                </span>
+              </i>
+            </IconLink> : ''
+          }
 
-          <IconLink href="/" > <i class="fa-solid fa-user"></i> </IconLink>
+          {user ? <IconLink href="/" > <i class="fa-solid fa-user"></i> </IconLink> : <IconLink href="#" > <i class="fa fa-sign-in" data-hs-overlay="#hs-focus-management-modal"></i> </IconLink>}
 
           <div class="md:border-s md:border-gray-300 md:my-6 md:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500 hidden">
             <button type="button" class="hs-dark-mode-active:hidden block hs-dark-mode group  items-center text-gray-600 hover:text-blue-600 font-medium dark:text-gray-400 dark:hover:text-gray-500" data-hs-theme-click-value="dark">
@@ -52,7 +58,7 @@ import Logo from '../components/site/Logo.astro';
 
 
           <div class="md:border-s md:border-gray-300 md:my-6 md:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500">
-            <Link href="/Admin/" text="Employers/Post Job" />
+            <Link href="/Employer/" text="Employers/Post Job" />
           </div>
         </div>
       </div>
