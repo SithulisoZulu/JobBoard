@@ -1,6 +1,6 @@
 ---
 import { clsx } from 'clsx'
-const { type, id, name, placeholder, required,  disabled, autofocus } = Astro.props
+const { type, id, name, placeholder, required,  disabled, autofocus, error, value } = Astro.props
 
 interface Props {
     type?: any
@@ -9,9 +9,11 @@ interface Props {
     placeholder?: string
     required?: boolean
     disabled?: boolean
-    autofocus?: any  
+    autofocus?: any
+    error?:   boolean
+    value?: string
 }
 ---
 
-<input type={type} id={id} name={name} autocomplete={id} placeholder={placeholder} required disabled={disabled} class={clsx(`form-input py-3 px-4 block w-full rounded-lg text-semibold border-0 ring-1 ring-gray-300 ring-inset focus:ring-0 focus:ring-inset focus:ring-sky-600 disabled:opacity-50 disabled:pointer-events-none me-2 sm:text-sm sm:leading-6` , disabled && "opacity-80 pointer-events-none")}
+<input type={type} id={id} name={name} autocomplete={id} placeholder={placeholder} required={required} value={value} disabled={disabled} autofocus={autofocus} class={clsx(`form-input py-3 px-4 block w-full rounded-lg text-semibold border-0 ring-1 ring-gray-300 ring-inset  focus:ring-inset focus:ring-sky-600 disabled:opacity-50 disabled:pointer-events-none me-2 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white  dark:focus:ring-sky-600 dark:border-0 dark:focus:border-0 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500` , disabled && "opacity-80 pointer-events-none", error && "ring-2 ring-rose-600")}
 />

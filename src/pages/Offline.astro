@@ -1,0 +1,38 @@
+---
+import OfflineLayout from "@layouts/OfflineLayout.astro";
+---
+
+<OfflineLayout title="Offline -  check network connection">
+    <!-- component -->
+<div class="lg:px-24 lg:py-24 md:py-20 md:px-44 px-4 py-24 items-center flex justify-center flex-col-reverse lg:flex-row md:gap-28 gap-16">
+    <div class="xl:pt-24 w-full xl:w-1/2 relative pb-12 lg:pb-0">
+        <div class="relative -mt-15">
+            <div class="absolute ">
+                <div class="">
+                    <h1 class="my-2  text-gray-800 font-bold text-2xl">
+                        Looks like you are currently offline.
+                    </h1>
+                    <p class="my-2 text-gray-800 mb-10">Check your connectivity and try again.</p>
+                    <a href="/" class="sm:w-full lg:w-auto my-2 border md py-4 px-8 text-center bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50 rounded-lg mt-10 sm:mb-20">
+                        Take me Home!
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="hidden md:block">
+        <img src="https://i.ibb.co/ck1SGFJ/Group.png" />
+    </div>
+</div>
+</OfflineLayout>
+
+<script>
+        if(navigator.onLine)
+    {
+        
+    }
+    else {
+        
+    }
+</script>

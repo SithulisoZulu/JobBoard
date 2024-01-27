@@ -3,16 +3,15 @@ import Link from '@components/ui/Link.astro'
 import IconLink from '@components/ui/IconLink.astro'
 import Logo from '@components/site/Logo.astro';
 
-
 const { user } = Astro.props
 ---
 <!-- ========== HEADER ========== -->
 <header class="top-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full text-sm pb-10 fixed">
-    <nav class="backdrop-blur-sm bg-white-700 relative w-full dark:border-gray-500 rounded-lg md:rounded-none py-3 px-4 md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto shadow-md" aria-label="Global">
+    <nav class="backdrop-blur-sm dark:backdrop-blur-lg bg-white-700 relative w-full dark:border-gray-500 py-3 px-4 md:flex md:items-center md:justify-between md:py-0 md:px-6 lg:px-8 xl:mx-auto shadow-md" aria-label="Global">
       <div class="flex items-center justify-between">
         <Logo />
         <div class="md:hidden">
-          <button type="button" class="hs-collapse-toggle w-8 h-8 flex justify-center items-center text-sm font-semibold rounded-full border border-gray-200 text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation" aria-label="Toggle navigation">
+          <button type="button" class="hs-collapse-toggle w-8 h-8 flex justify-center items-center text-sm font-semibold rounded-full text-gray-800 hover:bg-gray-100 dark:hover:bg-gray-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white" data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation" aria-label="Toggle navigation">
             <svg class="hs-collapse-open:hidden flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
             <svg class="hs-collapse-open:block hidden flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
           </button>
@@ -21,33 +20,112 @@ const { user } = Astro.props
 
       <div id="navbar-collapse-with-animation" class="hs-collapse hidden overflow-hidden transition-all md:justify-start duration-300 basis-full grow md:block">
         <div class="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:ps-7">
-          <Link href="/" text="home" />
-          <Link href="/" text="About" />
-          <!-- <Link href="/" text="Company Reviews" />
-          <Link href="/" text="Find Salaries" /> -->
+          <Link href="/" text="home"  />
+          <Link href="/about" text="About" />
+          <div class="block md:hidden">
+            <div class="flex flex-row gap-6 items-center mb-2">
+              { user ? 
 
+                <div>
+                  <IconLink href="/" > <i class="fa-solid fa-message"></i> </IconLink>
+                </div>
+
+                <div>
+                  <IconLink href="/" >
+                    <i class="fa fa-bell relative" aria-hidden="true">
+                      <span class="animate-ping transition-all ease-in-out duration-300 absolute -top-1 -end-1 inline-flex items-center w-2.5 h-2.5 rounded-full border-2 border-white text-xs font-medium bg-teal-500 text-white">
+                      <span class="sr-only">Badge value</span>
+                      </span>
+                    </i>
+                  </IconLink>     
+                </div>
+                : ''
+              }
+              <div>
+                <div class="md:border-s md:border-gray-300 md:my-6 md:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500 ">
+                  <button type="button" class="hs-dark-mode-active:hidden block hs-dark-mode group  items-center text-gray-600 hover:text-blue-600 font-medium dark:text-gray-400 dark:hover:text-gray-500" data-hs-theme-click-value="dark">
+                    <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                  </button>
+                  <button type="button" class="hs-dark-mode-active:block hidden hs-dark-mode group  items-center text-gray-600 hover:text-blue-600 font-medium dark:text-gray-400 dark:hover:text-gray-500" data-hs-theme-click-value="light">
+                    <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 8a2 2 0 1 0 4 4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            { user ?
+                <div class="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:hover] mt-4">
+                  <div class="flex items-center w-full text-black dark:text-white/[.8] hover:text-white font-medium">
+                    <IconLink > <i class="fa-solid fa-user"></i> <span class="font-semibold"> {`Hello,  ${user?.user_metadata.displayName}`}</span> </IconLink>
+                  </div>
+                
+                  <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] sm:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 sm:w-auto hidden z-10 bg-white sm:shadow-md rounded-lg p-2 dark:bg-gray-800 sm:dark:border dark:border-gray-700 dark:divide-gray-700 before:absolute top-full sm:border before:-top-5 before:start-0 before:w-full before:h-5">
+                    <h6 class="font-extrabold mb-2 mt-1 dark:text-white">{user?.email}</h6>
+                    <div class="flex flex-col">
+                      <div class="mb=2 p-1">
+                        <IconLink href="/Profile"><i class="fa-solid fa-user"></i> My Profile</IconLink>
+                      </div>
+                      <div class="mb=2 p-1">
+                        <IconLink href="/Help-center"><i class="fa fa-question-circle" aria-hidden="true"></i> Help center</IconLink>
+                      </div>
+                    </div>
+                    <hr class="border-gray-500 mt-3">
+                    <form action="/api/auth/signout" class="mt-2">
+                      <button type="submit" class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm sm:w-full text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" >
+                        Logout <i class="fa fa-sign-out ms-20" aria-hidden="true"></i>
+                      </button>
+                    </form>
+                  </div>
+                </div> 
+              :
+              <IconLink > <i class="fa fa-sign-in" data-hs-overlay="#hs-focus-management-modal"></i></IconLink> 
+            }
+          </div> 
         </div>
       </div>
-
 
       <div id="navbar-collapse-with-animation" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block">
         <div class="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:ps-7">
 
-          {user ? <IconLink href="/" > <i class="fa-solid fa-message"></i> </IconLink> : ''}
+          { user ? 
+              <IconLink href="/" > <i class="fa-solid fa-message"></i> </IconLink>
 
-          {user ? 
-            <IconLink href="/" >
-              <i class="fa fa-bell relative" aria-hidden="true">
-                <span class="animate-ping transition-all ease-in-out duration-300 absolute -top-1 -end-1 inline-flex items-center w-2.5 h-2.5 rounded-full border-2 border-white text-xs font-medium bg-teal-500 text-white">
-                  <span class="sr-only">Badge value</span>
-                </span>
-              </i>
-            </IconLink> : ''
+              <IconLink href="/" >
+                <i class="fa fa-bell relative" aria-hidden="true">
+                  <span class="animate-ping transition-all ease-in-out duration-300 absolute -top-1 -end-1 inline-flex items-center w-2.5 h-2.5 rounded-full border-2 border-white text-xs font-medium bg-teal-500 text-white">
+                    <span class="sr-only">Badge value</span>
+                  </span>
+                </i>
+              </IconLink> 
+            
+              <div class="hs-dropdown [--strategy:static] sm:[--strategy:fixed] [--adaptive:none] sm:[--trigger:hover]">
+                  <div class="flex items-center w-full text-black dark:text-white/[.8] hover:text-white font-medium">
+                    <IconLink > <i class="fa-solid fa-user"></i> <span class="font-semibold">{`Hello, ${user?.user_metadata.displayName}`}</span> </IconLink>
+                  </div>
+    
+                  <div class="hs-dropdown-menu transition-[opacity,margin] duration-[0.1ms] sm:duration-[150ms] hs-dropdown-open:opacity-100 opacity-0 sm:w-auto hidden z-10 bg-white sm:shadow-md rounded-lg p-2 dark:bg-gray-800 sm:dark:border dark:border-gray-700 dark:divide-gray-700 before:absolute top-full sm:border before:-top-5 before:start-0 before:w-full before:h-5">
+                  <h6 class="font-extrabold mb-2 mt-1 dark:text-white">{user?.email}</h6>
+                  <div class="flex flex-col">
+                    <div class="mb-2 p-1">
+                      <IconLink href="/Profile"><i class="fa-solid fa-user"></i> My Profile</IconLink>
+                    </div>
+                    <div class="mb-2 p-1">
+                      <IconLink href="/Help-center"><i class="fa fa-question-circle" aria-hidden="true"></i> Help center</IconLink>
+                    </div>
+                  </div>
+                  <hr class="border-gray-500 mt-3">
+                  <form action="/api/auth/signout" class="mt-2">
+                    <button type="submit" class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm sm:w-auto text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" >
+                      Logout <i class="fa fa-sign-out ms-20" aria-hidden="true"></i>
+                    </button>
+                  </form>
+                  </div>
+              </div>  
+            :
+            <IconLink > <i class="fa fa-sign-in" data-hs-overlay="#hs-focus-management-modal"></i> </IconLink>
           }
 
-          {user ? <IconLink href="/" > <i class="fa-solid fa-user"></i> </IconLink> : <IconLink href="#" > <i class="fa fa-sign-in" data-hs-overlay="#hs-focus-management-modal"></i> </IconLink>}
-
-          <div class="md:border-s md:border-gray-300 md:my-6 md:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500 hidden">
+          <div class="md:border-s md:border-gray-300 md:my-6 md:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500 ">
             <button type="button" class="hs-dark-mode-active:hidden block hs-dark-mode group  items-center text-gray-600 hover:text-blue-600 font-medium dark:text-gray-400 dark:hover:text-gray-500" data-hs-theme-click-value="dark">
               <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
             </button>
@@ -55,7 +133,6 @@ const { user } = Astro.props
               <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 8a2 2 0 1 0 4 4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
             </button>
           </div>
-
 
           <div class="md:border-s md:border-gray-300 md:my-6 md:ps-6 dark:border-gray-700 dark:text-gray-400 dark:hover:text-blue-500">
             <Link href="/Employer/" text="Employers/Post Job" />
@@ -65,4 +142,3 @@ const { user } = Astro.props
     </nav>
   </header>
   <!-- ========== END HEADER ========== -->
-

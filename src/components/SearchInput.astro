@@ -2,21 +2,17 @@
 import Input from '@components/ui/Input.astro'
 import Button from '@components/ui/Button.astro'
 ---
-
 <div class="max-w-[50rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto mt-10 " >
   <form id="search-form" action="/search">
-      <div class="flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-gray-200 rounded-lg p-2 shadow-lg ">
-        <div class="w-full">
-          <label for="search" class="sr-only">Search</label>
-            <div class="flex flex-row">
-
-              <Input type="text" id="queary" name="query" placeholder='Job title, Keywords' required />
-
-              <Input type="text" id="location" name="location" placeholder='City, state, zip code or "remote"' required />
-
-            </div>
+    <div class="flex flex-col items-center gap-2 sm:flex-row sm:gap-3 bg-gray-200 dark:bg-gray-900 rounded-lg p-2 shadow-lg ">
+      <div class="w-full">
+        <label for="search" class="sr-only">Search</label>
+        <div class="flex flex-row">
+          <Input type="text" id="queary" name="query" placeholder='Job title, Keywords' required />
+          <Input type="text" id="location" name="location" placeholder='City, state, zip code or "remote"' required />
         </div>
-        <Button type="submit">Find jobs</Button>
       </div>
-    </form>
+      <Button type="submit">Find jobs <i class="fa fa-search" aria-hidden="true"></i></Button>
+    </div>
+  </form>
 </div>

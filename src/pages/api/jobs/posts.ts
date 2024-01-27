@@ -1,5 +1,4 @@
 
-import type { StringFormat } from "firebase/storage";
 import { app } from "../../../firebase/server";
 import { getFirestore } from "firebase-admin/firestore";
 
@@ -19,7 +18,8 @@ interface Job {
   refNo        : string;
   salary       : string;
   title        : string;
-  isUrgent     : boolean
+  isUrgent     : boolean;
+  tags         : Array<string>
 }
 
 const db = getFirestore(app);

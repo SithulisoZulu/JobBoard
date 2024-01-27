@@ -1,0 +1,12 @@
+---
+      function Counter({ initialCount }) {
+        function increment() {
+          document.getElementById('count').innerText = parseInt(document.getElementById('count')?.innerText) + 1;
+        }
+
+---
+
+<div>
+    <p>Count: <span id="count">{initialCount}</span></p>
+    <button onclick={increment}>Increment</button>
+</div>

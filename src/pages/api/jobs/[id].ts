@@ -12,8 +12,7 @@ export const GET: APIRoute = async () => {
   //   hello: params.get('id'),
   // };
 
-  // this will yield { hello: 'meow' } on your Astro server console
-  console.log('Hello')
+  // this will yield { hello: 'meow' } on your Astro server 
   
   // return the response
   return new Response(JSON.stringify('hello'), {

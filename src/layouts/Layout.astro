@@ -1,36 +1,53 @@
 ---
-import NavBar from '../components/NavBar.astro';
-import Footer from '../components/Footer.astro';
-import Cookies from '../components/Cookies.astro';
-import BackToTop from '../components/ui/BackToTop.astro';
-import LoginModal from '@components/LoginModal.astro';
-// import { ViewTransitions } from 'astro:transitions';
+import { SITE_DESCRIPTION } from 'src/constants';
+import NavBar from '@components/NavBar.astro';
+import Footer from '@components/Footer.astro';
+import Cookies from '@components/Cookies.astro';
+import BackToTop from '@components/ui/BackToTop.astro';
+import Loader from '@components/ui/Loader.astro';
+import CancelReadyToWorkModal from '@components/profile/modals/cancelReadyToWorkModal.astro';
+import AuthContainer from "@containers/AuthContainer.astro";
+import ProfileContainer from '@containers/ProfileContainer.astro';
+import { supabase } from "@lib/supabase";
+
+const { cookies } = Astro;
+const accessToken = cookies.get("sb-access-token");
+const refreshToken = cookies.get("sb-refresh-token");
+
+const { data, error } = await supabase.auth.setSession({
+  refresh_token: refreshToken?.value!,
+  access_token: accessToken?.value!,
+});
+
+if (error) {
+  cookies.delete("sb-access-token", {
+    path: "/",
+  });
+  cookies.delete("sb-refresh-token", {
+    path: "/",
+  });
+}
 
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
-
-const user = ''
+const user = data?.user
 ---
-
 <!doctype html>
 <html lang="en" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
+		<meta name="description" content={SITE_DESCRIPTION} />
 		<meta name="viewport" content="width=device-width" />
-		<!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-
 
 		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
 		<link rel="icon" type="image/png" href="/favicon/favicon-32x32.png">
 		<link rel="icon" type="image/png"  href="/favicon/favicon-16x16.png">
 		<link rel="manifest" href="/favicon/site.webmanifest">
-		<!-- <ViewTransitions /> -->
 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -39,21 +56,26 @@ const user = ''
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.0.1/remixicon.css">
 
 	</head>
-	<body class="dark:bg-[#13151a]">
-		<NavBar
-			user={user}
-		/>
+	<body class="dark:bg-gray-800">
 
-		<slot />
+		<div class=" absolute h-screen bg-gray-100 dark:bg-[#1E293B] bg-blend-darken z-40 w-full flex justify-center items-centertransition-all ease-in-out duration-30" id="loader">
+			<Loader />
+		</div>
 
-		<Footer />
-		
-		<Cookies />
+		<div class="relative  transition-all ease-in-out duration-300" id="content">
+			<NavBar
+				user={user}
+			/>
+			<slot  />
+			<Footer />
+			<Cookies />
+			<BackToTop />
+			<AuthContainer />
+			<!-- <ProfileContainer /> -->
+			<CancelReadyToWorkModal />
+		</div>
 
-		<BackToTop />
-
-		<LoginModal />
-
+		<script src="../assets/scripts/Functions.js"></script>
 		<script src="../../node_modules/preline/dist/preline.js"></script>
 	</body>
 </html>

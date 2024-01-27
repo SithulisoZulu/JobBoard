@@ -1,0 +1,25 @@
+---
+import SearchInput from "@components/SearchInput.astro";
+import Button from "@components/ui/Button.astro";
+import Input from "@components/ui/Input.astro";
+import AdminLayout from "@layouts/AdminLayout.astro";
+
+import { supabase } from "@lib/supabase";
+
+
+---
+
+<AdminLayout title="Create a new job">
+
+    <SearchInput />
+
+    <div class="max-w-[50rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto mt-10 " >
+        <form action="/api/jobs/create" method="post">
+            <Input type="text" name="email" id="email" placeholder="email" required={true} autofocus={true} />
+            <Input type="password" name="password" id="password" placeholder="password" disabled={true} />
+            <Button type="submit">Sign in</Button>
+         </form>
+
+    </div>
+
+</AdminLayout>

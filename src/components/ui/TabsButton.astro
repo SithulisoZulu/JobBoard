@@ -9,7 +9,7 @@ const { text, tab, active } = Astro.props;
 ---
 <button
     type="button"
-    class={`font-bold text-xl py-4 px-9 inline-flex items-center gap-x-2 border-b-2 border-transparent whitespace-nowrap text-gray-500 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none  ${active ? 'hs-tab-active:font-bold hs-tab-active:border-blue-600 hs-tab-active:text-gray-900 active' : ''}`}
+    class={`font-bold text-xl py-4 px-9 inline-flex items-center gap-x-2 border-b-2 border-transparent whitespace-nowrap text-gray-500 hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none ${active ? 'hs-tab-active:font-bold hs-tab-active:border-blue-600 hs-tab-active:text-gray-900 dark:hs-tab-active:text-white active' : ''}`}
     id="basic-tabs-item-1"
     data-hs-tab={tab}
     aria-controls="basic-tabs-1"
