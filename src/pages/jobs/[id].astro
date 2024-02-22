@@ -32,43 +32,43 @@ const Job = PostsSnapshot.data();
     <SearchInput />
 
     <div class="px-4 sm:px-3 lg:px-8">
-        <div class="border rounded-lg max-w-[50rem] mx-auto mb-4 dark:before:border-gray-700 dark:before:hover:border-blue-500 before:inset-0 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+        <div class="border rounded-lg max-w-[50rem] mx-auto mb-4  before:border-gray-200 before:rounded-xl before:transition  before:hover:shadow-lg dark:rounded-xl  -z-2 transition-all ease-in-out duration-300 dark:border-gray-700 dark:text-white animate">
             <div class="shadow-md p-3" >
-                <h1 class="font-semibold capitalize mt-2">{Job!.title}</h1>
+                <h1 class="font-semibold capitalize mt-2 text-2xl">{Job!.title}</h1>
                 <div class="mt-2">
-                    <i class="ri-building-line text-black"></i>
+                    <i class="ri-building-line "></i>
                     <Link text="Dut Appfactory" href="/Company/somecompany"/>
                 </div>
                 <div class="mt-2">
                     <i class="bi bi-geo-alt "></i>
-                    <span class="text-small text-gray-600">{Job!.center}</span>
+                    <span class="text-small">{Job!.center}</span>
                 </div>
                 <div class="mt-2">
-                    <span class="text-small text-gray-900">{Job!.salary} - Full-time</span>
+                    <span class="text-smal">{Job!.salary} - Full-time</span>
                 </div>
 
-                <div class="flex flex-row mt-2">
+                <div class="flex flex-row mt-4">
 
                     <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 me-2">
                         Apply now
                     </button>
 
-                    <button type="button" class="flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] text-sm font-semibold rounded-lg border border-transparent bg-gray-400 text-white hover:bg-gray-500 disabled:opacity-50 disabled:pointer-events-none me-2">
-                        <i class="ri-bookmark-line text-lg"></i>
+                    <button type="button" class="flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] text-sm font-semibold rounded-lg border border-transparent text-white hover:bg-gray-500 disabled:opacity-50 bg-gray-200 dark:bg-gray-900 disabled:pointer-events-none me-2">
+                        <i class="fa-regular fa-bookmark icon"></i>
                     </button>
 
-                    <button type="button" class="flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] text-sm font-semibold rounded-lg border border-transparent bg-gray-400 text-white hover:bg-gray-500 disabled:opacity-50 disabled:pointer-events-none">
-                        <i class="ri-spam-2-line text-lg"></i>
+                    <button type="button" class="flex flex-shrink-0 justify-center items-center gap-2 h-[2.375rem] w-[2.375rem] text-sm font-semibold rounded-lg border border-transparent  text-white hover:bg-gray-500 disabled:opacity-50 bg-gray-200 dark:bg-gray-900 disabled:pointer-events-none">
+                        <i class="fa fa-ban icon"></i>
                     </button>
                 </div>
             </div>
 
             <div class="h-auto">
-                <div class="mt-2 p-3 border-b">
+                <div class="mt-2 p-3 border-b dark:border-gray-700">
                     <h1 class="font-semibold capitalize mt-2">Job details</h1>
                     <div class="mt-2">
                         <i class="bi bi-cash"></i>
-                        <span class="text-small font-semibold text-gray-900">Pay</span>
+                        <span class="text-small font-semibold">Pay</span>
 
                         <div class="flex flex-row">
                             <div class="mt-2 ms-4 text-green-800 bg-green-700 bg-opacity-20 rounded-md text-sm font-bold p-1 w-auto px-3 shadow-md">
@@ -78,7 +78,7 @@ const Job = PostsSnapshot.data();
                     </div>
                     <div class="mt-2">
                         <i class="ri-suitcase-line"></i>
-                        <span class="text-small font-semibold text-gray-900">Job type</span>
+                        <span class="text-small font-semibold">Job type</span>
 
                         <div class="flex flex-row">
                             <div class="mt-2 ms-4 text-green-800 bg-green-700 bg-opacity-20 rounded-md text-sm font-bold p-1 w-auto px-3 shadow-md">
@@ -87,16 +87,21 @@ const Job = PostsSnapshot.data();
                         </div>
                     </div>
                 </div>
-                <div class="mt-2 p-3 border-b">
+                <div class="mt-2 p-3 border-b dark:border-gray-700">
                     <h1 class="font-semibold capitalize mt-2">Location</h1>
                     <div class="mt-2">
                         <i class="ri-map-pin-line"></i><label class="ms-5">{Job!.center}</label>
                     </div>
                 </div>
-                <div class="mt-2 p-3 ">
+                <div class="mt-2 p-3 dark:text-gray-200">
                     <p>{Job!.duties}</p>
                 </div>
             </div>
         </div>
     </div>
 </Layout>   
+<style>
+    .icon {
+      font-size: 17px;
+    }
+  </style>

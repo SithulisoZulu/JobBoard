@@ -1,18 +1,19 @@
 ---
 import Layout from '@layouts/Layout.astro'
 import PageHeader from '@components/profile/PageHeader.astro'
+import ProfileContainer from '@containers/ProfileContainer.astro'
 ---
 
 <Layout title="Job Search | Qualifications">
-  
     <div class="max-w-[40rem] px-4 py-10 lg:pt-20 sm:px-6 lg:px-8 lg:py-14 mx-auto mt-10 dark:text-white">
         <PageHeader href="/Profile" title="Qualifications" subtitle="We use these details to show you jobs that match your unique skills and experience." />
         <div class="mt-5">
             <div class="flex flex-col gap-3 text-semibold dark:text-white/65">
-                <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer">
+                <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer" data-hs-overlay="#addSkillModal">
+                    
                     <div class="flex flex-row items-center w-full justify-between">
                         <div class="flex flex-col">
-                        <h1 class="font-bold mb-1 text-lg">Work Expirience</h1>
+                        <h1 class="font-bold mb-1 text-lg">Skills</h1>
                         </div>
                         <div>
                         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -20,9 +21,9 @@ import PageHeader from '@components/profile/PageHeader.astro'
                     </div>
                 </div>
                 <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer">
-                    <div class="flex flex-row items-center w-full justify-between">
+                    <div class="flex flex-row items-center w-full justify-between" data-hs-overlay="#addExperienceModal">
                         <div class="flex flex-col">
-                        <h1 class="font-bold mb-1 text-lg">Work Expirience</h1>
+                        <h1 class="font-bold mb-1 text-lg">Work experience</h1>
                         </div>
                         <div>
                         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -30,29 +31,39 @@ import PageHeader from '@components/profile/PageHeader.astro'
                     </div>
                 </div>
                 <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer">
-                    <div class="flex flex-row items-center w-full justify-between">
+                    <div class="flex flex-row items-center w-full justify-between" data-hs-overlay="#addEducationModal">
                         <div class="flex flex-col">
-                        <h1 class="font-bold mb-1 text-lg">Work Expirience</h1>
+                        <h1 class="font-bold mb-1 text-lg">Education</h1>
                         </div>
                         <div>
                         <i class="fa fa-plus" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
-                <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer">
+                <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer" data-hs-overlay="#addLicensesModal">
                     <div class="flex flex-row items-center w-full justify-between">
                         <div class="flex flex-col">
-                        <h1 class="font-bold mb-1 text-lg">Work Expirience</h1>
+                        <h1 class="font-bold mb-1 text-lg">Licences</h1>
                         </div>
                         <div>
                         <i class="fa fa-plus" aria-hidden="true"></i>
                         </div>
                     </div>
                 </div>
-                <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer">
+                <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer" data-hs-overlay="#addCertificationModal">
                     <div class="flex flex-row items-center w-full justify-between">
                         <div class="flex flex-col">
-                        <h1 class="font-bold mb-1 text-lg">Work Expirience</h1>
+                        <h1 class="font-bold mb-1 text-lg">Certifications</h1>
+                        </div>
+                        <div>
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer" data-hs-overlay="#addLanguageModal">
+                    <div class="flex flex-row items-center w-full justify-between">
+                        <div class="flex flex-col">
+                        <h1 class="font-bold mb-1 text-lg">Languages</h1>
                         </div>
                         <div>
                         <i class="fa fa-plus" aria-hidden="true"></i>
@@ -62,5 +73,5 @@ import PageHeader from '@components/profile/PageHeader.astro'
             </div>
         </div>
     </div>
-
+    <ProfileContainer></ProfileContainer>
 </Layout>

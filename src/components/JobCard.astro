@@ -29,7 +29,7 @@ const { job, saved } = Astro.props
     
         <div class="inline-flex items-center mt-3 mb-2">
             <span class="w-2 h-2 inline-block bg-gray-500 rounded-full me-2"></span>
-            <span class="text-gray-600 dark:text-gray-400">{job.duties}</span>
+            <span class="text-gray-600 dark:text-gray-400 transition-all ease-in-out duration-700">{job.duties}</span>
         </div>
     
         <span class="text-sm text-gray-600">{job.date}</span>
@@ -49,7 +49,7 @@ const { job, saved } = Astro.props
               <a href={`/Report/${job.id}`}  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
                 <i class="ri-flag-fill text-xl"></i> Report job
               </a>
-              <a href={`/job/${job.id}`} target="_blank" class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-blue-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
+              <a href={`/jobs/${job.id}`} target="_blank" class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm font-semibold text-blue-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:bg-gray-700" href="#">
                 <i class="fa fa-paper-plane text-blue-500" aria-hidden="true"></i> Apply now
               </a>
             </div>

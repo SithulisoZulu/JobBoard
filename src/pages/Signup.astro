@@ -1,0 +1,150 @@
+---
+import Layout from '@layouts/Layout.astro'
+import Input from '@components/ui/Input.astro';
+import SocialButton from '@components/ui/SocialButton.astro';
+import { supabase } from '@lib/supabase';
+
+const { data, error  } = await supabase.from('Users').select()
+
+console.log(data)
+---
+<Layout title="Sign in | Job Board">
+    <div class="max-w-[50rem] px-4 py-28  lg:px-8 mx-auto ">
+        <div class="bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
+          <div class="p-4 sm:p-7">
+            <div class="text-center">
+              <h2 class="block text-2xl font-bold text-gray-800 dark:text-gray-200">Sign up</h2>
+              <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                Already have an account?
+                <a class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 cursor-pointer" href="/Signin">
+                  Sign in here
+                </a>
+              </p>
+            </div>
+    
+            <div class="mt-5">
+              <form action="/api/auth/signin" method="post" class="hidden">
+                <SocialButton text="Sign up with Linkedin" />
+              </form>
+              
+              <div class="py-3 hidden items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">Or</div>
+    
+              <!-- Form -->
+              <form action="/api/auth/register" method="post">
+                <div class="grid gap-y-4">
+                  <!-- Form Group -->
+                  <div class="mb-2">
+                    <label for="email" class="block text-sm mb-2 dark:text-white">Name</label>
+                    <div class="relative">
+                      <Input type="name" id="name" name="name" placeholder="Enter Your Name" required={true} autofocus={true} />
+                      </div>
+                    </div>
+                    <p class="hidden text-xs text-red-600 mt-2" id="email-error">Please include a valid email address so we can get back to you</p>
+                  </div>
+                  <!-- End Form Group -->
+    
+                  <!-- Form Group -->
+                  <div class="mb-2">
+                    <label for="password" class="block text-sm mb-2 dark:text-white">Email Address</label>
+                    <div class="relative">
+                      <Input type="email" id="email" name="email" placeholder="Enter email address" required={true} autofocus={true} />
+                      <div class="hidden absolute inset-y-0 end-0 items-center pointer-events-none pe-3">
+                        <svg class="h-5 w-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="hidden text-xs text-red-600 mt-2" id="password-error">8+ characters required</p>
+                  </div>
+                  <!-- End Form Group -->
+
+                  <!-- Form Group -->
+                  <div class="mb-2">
+                    <label for="password" class="block text-sm mb-2 dark:text-white">Contact number</label>
+                    <div class="relative">
+                      <Input type="text" id="number" name="number" placeholder="Enter contact number" required={true} autofocus={true} />
+                      <div class="hidden absolute inset-y-0 end-0 items-center pointer-events-none pe-3">
+                        <svg class="h-5 w-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="hidden text-xs text-red-600 mt-2" id="password-error">8+ characters required</p>
+                  </div>
+                  <!-- End Form Group -->
+    
+                  <!-- Form Group -->
+                  <div class="mb-2">
+                    <label for="confirm-password" class="block text-sm mb-2 dark:text-white">Password</label>
+                    <div class="relative">
+                      <Input type="password" id="password" name="password" placeholder="Enter email address" required={true} autofocus={true} />
+                      <div class="hidden absolute inset-y-0 end-0 items-center pointer-events-none pe-3">
+                        <svg class="h-5 w-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                        </svg>
+                      </div>
+                    </div>
+                    <p class="hidden text-xs text-red-600 mt-2" id="confirm-password-error">Password does not match the password</p>
+                  </div>
+                  <!-- End Form Group -->
+    
+                  <!-- Checkbox -->
+                  <div class="flex items-center mb-3 mt-2">
+    
+                      <div class="flex">
+                          <input type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-checked-checkbox">
+                          <label for="remember-me" class="ms-2 text-sm dark:text-white">I accept the <a class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Terms and Conditions</a></label>
+                        </div>
+                  </div>
+                  <!-- End Checkbox -->
+    
+                  <button type="submit" id="signup" class="signup w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Sign up</button>
+                </div>
+              </form>
+              <!-- End Form -->
+          </div>
+        </div>
+    </div>
+
+    <div id="cookies-simple-with-icon-and-dismiss-button" class="fixed bottom-0 end-0 z-[60] sm:max-w-sm w-full mx-auto p-6 hidden">
+      <div class="flex p-4  bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-[#1E293B] dark:border-gray-700">
+        <div class="flex-shrink-0">
+          <svg class="h-5 w-5 text-gray-600 mt-1 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+        </div>
+        <div class="ms-4">
+          <h3 class="text-gray-800 font-semibold dark:text-white">
+            App notifications
+          </h3>
+          <div class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            Notifications may include alerts, sounds and icon badges.
+          </div>
+          <div class="mt-4">
+            <div class="flex space-x-3">
+              <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:text-blue-800 dark:text-blue-500 dark:focus:text-blue-400">
+                Don't allow
+              </button>
+              <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:text-blue-800 dark:text-blue-500 dark:focus:text-blue-400">
+                Allow
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</Layout>
+
+<script>
+// Assuming you have a button with the id "signup"
+
+const spinner = `<div class="animate-spin inline-block w-6 h-6 border-[3px] border-current border-t-transparent text-white rounded-full dark:text-white" role="status" aria-label="loading">
+  <span class="sr-only">Loading...</span>
+</div>`
+const btn = document.querySelector("#signup") as HTMLButtonElement | null;
+
+if (btn) {
+  btn.onclick = () => {
+    btn.innerHTML = spinner; // Use btn instead of this
+  };
+}
+
+</script>

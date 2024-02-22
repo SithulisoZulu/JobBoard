@@ -3,6 +3,8 @@ import { app } from "../firebase/server";
 import { getAuth } from "firebase-admin/auth";
 import Layout from "../layouts/Layout.astro";
 import SearchInput from "@components/SearchInput.astro";
+import Input from "@components/ui/Input.astro";
+import SocialButton from "@components/ui/SocialButton.astro";
 
 /* Check if the user is authenticated */
 const auth = getAuth(app);
@@ -18,52 +20,72 @@ if (Astro.cookies.has("session")) {
 <Layout title="Sign in">
   <SearchInput />
   <h1>Sign in</h1>
-  <p>New here? <a href="/register">Create an account</a></p>
-  <form action="/api/auth/signin" method="post">
-    <label for="email" for="email">Email</label>
-    <input type="email" name="email" id="email" />
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" />
-    <button type="submit">Login</button>
-  </form>
+  <div class="max-w-[50rem] px-4 py-28  lg:px-8 mx-auto ">
+    <div class="bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
+      <div class="p-4 sm:p-7">
+        <div class="text-center">
+          <h2 class="block text-2xl font-bold text-gray-800 dark:text-gray-200">Sign up</h2>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            Already have an account?
+            <a class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 cursor-pointer" href="/Signin">
+              Sign in here
+            </a>
+          </p>
+        </div>
+
+        <div class="mt-5">
+          <form action="/api/auth/signin" method="post" class="hidden">
+            <SocialButton text="Sign up with Linkedin" />
+          </form>
+          
+          <div class="py-3 hidden items-center text-xs text-gray-400 uppercase before:flex-[1_1_0%] before:border-t before:border-gray-200 before:me-6 after:flex-[1_1_0%] after:border-t after:border-gray-200 after:ms-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">Or</div>
+
+          <!-- Form -->
+          <form action="/api/jobs/create" method="post">
+            <div class="grid gap-y-4">
+              <!-- Form Group -->
+              <div class="mb-2">
+                <label for="email" class="block text-sm mb-2 dark:text-white">Name</label>
+                <div class="relative">
+                  <Input type="text" id="email" name="email" placeholder="Enter Your Name" required={true} autofocus={false} />
+                  </div>
+                </div>
+                <p class="hidden text-xs text-red-600 mt-2" id="email-error">Please include a valid email address so we can get back to you</p>
+              </div>
+              <!-- End Form Group -->
+
+              <!-- Form Group -->
+              <div class="mb-2">
+                <label for="password" class="block text-sm mb-2 dark:text-white">Email Address</label>
+                <div class="relative">
+                  <Input type="password" id="password" name="password" placeholder="Enter password" required={true} autofocus={false} />
+                  <div class="hidden absolute inset-y-0 end-0 items-center pointer-events-none pe-3">
+                    <svg class="h-5 w-5 text-red-500" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                    </svg>
+                  </div>
+                </div>
+                <p class="hidden text-xs text-red-600 mt-2" id="password-error">8+ characters required</p>
+              </div>
+              <!-- End Form Group -->
+
+
+
+              <!-- Checkbox -->
+              <div class="flex items-center mb-3 mt-2">
+
+                  <div class="flex">
+                      <input type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="hs-checked-checkbox">
+                      <label for="remember-me" class="ms-2 text-sm dark:text-white">I accept the <a class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">Terms and Conditions</a></label>
+                    </div>
+              </div>
+              <!-- End Checkbox -->
+
+              <button type="submit" id="signup" class="signup w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">Sign up</button>
+            </div>
+          </form>
+          <!-- End Form -->
+      </div>
+    </div>
+</div>
 </Layout>
-<script>
-  import {
-    getAuth,
-    inMemoryPersistence,
-    signInWithEmailAndPassword,
-  } from "firebase/auth";
-  import { app } from "../firebase/client";
-
-  const auth = getAuth(app);
-  // This will prevent the browser from storing session data
-  auth.setPersistence(inMemoryPersistence);
-
-  const form = document.querySelector("form") as HTMLFormElement;
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    const email = formData.get("email")?.toString();
-    const password = formData.get("password")?.toString();
-
-    if (!email || !password) {
-      return;
-    }
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const idToken = await userCredential.user.getIdToken();
-    const response = await fetch("/api/auth/signin", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${idToken}`,
-      },
-    });
-
-    if (response.redirected) {
-      window.location.assign(response.url);
-    }
-  });
-</script>
