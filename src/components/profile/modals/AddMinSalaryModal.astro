@@ -1,0 +1,52 @@
+---
+import Button from "@components/ui/Button.astro";
+import Input from "@components/ui/Input.astro";
+import CancelModalButton from "./CancelModalButton.astro";
+
+const { id } = Astro.params;
+
+const  periods = [
+    "Per hour", "Per day", "Per week", "Per month", "Per year"
+]
+---
+<div id="addMinSalaryModal" class="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">
+  <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all lg:max-w-4xl lg:w-full m-3 lg:mx-auto items-center">
+    <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7] ">
+      <div class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
+        <h3 class="font-bold text-gray-800 dark:text-white">
+          Edit pay
+        </h3>
+        <button type="button" class="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#addMinSalaryModal">
+          <span class="sr-only">Close</span>
+          <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <form action={`/api/accounts/preferences/salary/${id}`} method="post">
+        <div class="p-4 overflow-y-auto">
+            <div class="flex gap-2 w-full items-center">
+                <div class="w-full">
+                    <label for="salary" class="block text-sm mb-2 dark:text-white font-bold">Minimum base pay (R) <span class="text-rose-700">*</span></label>
+                    <Input id="salary" name="salary" placeholder='Example: 20 000' required autofocus />
+                </div>
+                <div class="w-full">
+                    <label for="period" class="block text-sm mb-2 dark:text-white font-bold">Pay period <span class="text-rose-700">*</span></label>
+                    <select id="period" name="period" class="form-input py-3 px-4 block w-full rounded-lg text-semibold border-0 ring-1 ring-gray-300 ring-inset  focus:ring-inset focus:ring-sky-600 disabled:opacity-50 disabled:pointer-events-none me-2 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white  dark:focus:ring-sky-600 dark:border-0 dark:focus:border-0 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500">
+                        <option selected>select</option>
+                        {
+                          periods.map((period) => (
+                            <option value={period}>{period}</option>
+                          ))
+                        }
+                      </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-end items-center gap-x-2 py-3 px-4 dark:border-gray-700">
+          <CancelModalButton modal="#addMinSalaryModal"/>
+          <Button type="submit">Save</Button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

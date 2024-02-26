@@ -1,6 +1,10 @@
 ---
 import Button from "@components/ui/Button.astro";
 import Input from "@components/ui/Input.astro";
+import CancelModalButton from "./CancelModalButton.astro";
+
+const id = Astro.params.id
+
 const Proficiencs = [
     'Native', 'Expert', 'Fluent', 'Intermediate', 'Beginner'
   ];
@@ -18,27 +22,27 @@ const Proficiencs = [
           <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
         </button>
       </div>
-      <div class="p-4 overflow-y-auto">
-        <label for="email" class="block text-sm mb-2 dark:text-white font-bold">Language</label>
-        <Input type="text" id="language" name="language" placeholder='Enter Language' required autofocus />
-      </div>
-      <div class="p-4 overflow-y-auto">
-          <label for="email" class="block text-sm mb-2 dark:text-white font-bold">Expiration date</label>
-            <select class="form-input py-3 px-4 block w-full rounded-lg text-semibold border-0 ring-1 ring-gray-300 ring-inset  focus:ring-inset focus:ring-sky-600 disabled:opacity-50 disabled:pointer-events-none me-2 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white  dark:focus:ring-sky-600 dark:border-0 dark:focus:border-0 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500">
-              <option selected>Select</option>
-              {
-                Proficiencs.map((Proficiency) => (
-                  <option value={Proficiency}>{Proficiency}</option>
-                ))
-              }
-            </select>
-      </div>
-      <div class="flex justify-end items-center gap-x-2 py-3 px-4 dark:border-gray-700">
-        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-base rounded-lg font-semibold text-blue-500 hover:bg-blue-300 dark:hover:bg-[#1E293B] disabled:opacity-50 disabled:pointer-events-none transition-all ease-in-out duration-300" data-hs-overlay="#addLanguageModal">
-          Cancel
-        </button>
-        <Button type="submit">Save</Button>
-      </div>
+      <form action={`/api/accounts/languages/${id}`} method="post">     
+        <div class="p-4 overflow-y-auto">
+          <label for="language" class="block text-sm mb-2 dark:text-white font-bold">Language <span class="text-rose-700">*</span></label>
+          <Input type="text" id="language" name="language" placeholder='Enter Language' required autofocus />
+        </div>
+        <div class="p-4 overflow-y-auto">
+            <label for="Proficiency" class="block text-sm mb-2 dark:text-white font-bold">Proficiency <span class="text-rose-700">*</span></label>
+              <select id="Proficiency" name="Proficiency" class="form-input py-3 px-4 block w-full rounded-lg text-semibold border-0 ring-1 ring-gray-300 ring-inset  focus:ring-inset focus:ring-sky-600 disabled:opacity-50 disabled:pointer-events-none me-2 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white  dark:focus:ring-sky-600 dark:border-0 dark:focus:border-0 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500">
+                <option selected>Select</option>
+                {
+                  Proficiencs.map((Proficiency) => (
+                    <option value={Proficiency}>{Proficiency}</option>
+                  ))
+                }
+              </select>
+        </div>
+        <div class="flex justify-end items-center gap-x-2 py-3 px-4 dark:border-gray-700">
+          <CancelModalButton modal="#addLanguageModal"/>
+          <Button type="submit">Save</Button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

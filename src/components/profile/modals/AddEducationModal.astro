@@ -1,6 +1,7 @@
 ---
 import Button from "@components/ui/Button.astro";
 import Input from "@components/ui/Input.astro";
+import CancelModalButton from "./CancelModalButton.astro";
 
 const id = Astro.params.id
 ---
@@ -21,17 +22,15 @@ const id = Astro.params.id
       <form action={`/api/accounts/education/${id}`} method="post">
         <div class="p-4 overflow-y-auto">
           <label for="email" class="block text-sm mb-2 dark:text-white font-bold">Level of education</label>
-          <Input type="text" id="level" name="level" placeholder='Enter level of education' required autofocus />
+          <Input type="text" id="level" name="level" placeholder='Example: National Diploma' required autofocus />
         </div>
         <div class="p-4 overflow-y-auto">
           <label for="email" class="block text-sm mb-2 dark:text-white font-bold">Field of study</label>
-          <Input type="text" id="field_of_study" name="field_of_study" placeholder='Enter Company name' required autofocus />
+          <Input type="text" id="field_of_study" name="field_of_study" placeholder='Example: Software Development' required autofocus />
         </div>
         
         <div class="flex justify-end items-center gap-x-2 py-3 px-4 dark:border-gray-700 border-t dark:border-t-gray-700">
-          <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-base rounded-lg font-semibold text-blue-500 hover:bg-blue-300 disabled:opacity-50 disabled:pointer-events-none transition-all ease-in-out duration-300" data-hs-overlay="#hs-focus-management-modal">
-            Cancel
-          </button>
+          <CancelModalButton modal="#addEducationModal"/>
           <Button type="submit">Save</Button>
         </div>    
       </form>

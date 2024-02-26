@@ -1,6 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import PageHeader from "@components/profile/PageHeader.astro";
+import ProfileContainer from "@containers/ProfileContainer.astro";
 ---
 
 <Layout title="Job Search | Preferences">
@@ -8,7 +9,8 @@ import PageHeader from "@components/profile/PageHeader.astro";
         <PageHeader title="Preferences" subtitle="Tell us the job details you’re interested in to get better recommendations across JobBoard." href="/Profile" />
 
         <div class="mt-5">
-            <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer">
+            <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer" data-hs-overlay="#addRemoteModal"
+            >
                 <div class="flex flex-row items-center w-full justify-between">
                     <div class="flex flex-col text-start">
                         <div class="flex flex-row items-center">
@@ -17,24 +19,12 @@ import PageHeader from "@components/profile/PageHeader.astro";
                         </div>
                     </div>
                     <div>
-                    <i class="fa fa-plus" aria-hidden="true"></i>
+                        <i class="fa fa-plus" aria-hidden="true"></i>
                     </div>
                 </div>
             </div>
-            <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer">
-                <div class="flex flex-row items-center w-full justify-between">
-                    <div class="flex flex-col text-start">
-                        <div class="flex flex-row items-center">
-                            <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>   
-                            <h1 class="font-bold mb-1 ms-4">Relocation</h1>
-                        </div>
-                    </div>
-                    <div>
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer">
+            <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer" data-hs-overlay="#addJobTitlesModal"
+            >
                 <div class="flex flex-row items-center w-full justify-between">
                     <div class="flex flex-col text-start">
                         <div class="flex flex-row items-center">
@@ -47,7 +37,8 @@ import PageHeader from "@components/profile/PageHeader.astro";
                     </div>
                 </div>
             </div>
-            <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer">
+            <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer" data-hs-overlay="#addJobTypesModal"
+            >
                 <div class="flex flex-row items-center w-full justify-between">
                     <div class="flex flex-col text-start">
                         <div class="flex flex-row items-center">
@@ -60,7 +51,9 @@ import PageHeader from "@components/profile/PageHeader.astro";
                     </div>
                 </div>
             </div>
-            <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer">
+            <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer"
+            data-hs-overlay="#addMinSalaryModal"
+            >
                 <div class="flex flex-row items-center w-full justify-between">
                     <div class="flex flex-col text-start">
                         <div class="flex flex-row items-center">
@@ -73,19 +66,7 @@ import PageHeader from "@components/profile/PageHeader.astro";
                     </div>
                 </div>
             </div>
-            <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer">
-                <div class="flex flex-row items-center w-full justify-between">
-                    <div class="flex flex-col text-start">
-                        <div class="flex flex-row items-center">
-                            <i class="bi bi-clock-fill"></i>  
-                            <h1 class="font-bold mb-1 ms-4">Availability</h1>
-                        </div>
-                    </div>
-                    <div>
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
+    <ProfileContainer></ProfileContainer>
 </Layout>

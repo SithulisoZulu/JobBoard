@@ -1,6 +1,7 @@
 ---
 import Button from "@components/ui/Button.astro";
 import Input from "@components/ui/Input.astro";
+import CancelModalButton from "./CancelModalButton.astro";
 
 const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
@@ -30,13 +31,13 @@ const years = generateYears()
         </button>
       </div>
       <div class="p-4 overflow-y-auto">
-        <label for="email" class="block text-sm mb-2 dark:text-white font-bold">Certification name</label>
-        <Input id="text" name="Certification" placeholder='Example: MS Power platform developer' required autofocus />
+        <label for="Certification" class="block text-sm mb-2 dark:text-white font-bold">Certification name</label>
+        <Input id="Certification" name="Certification" placeholder='Example: MS Power platform developer' required autofocus />
       </div>
       <div class="p-4 overflow-y-auto">
           <label for="email" class="block text-sm mb-2 dark:text-white font-bold">Expiration date</label>
           <div class="flex flex-row">
-            <select class="form-input py-3 px-4 block w-full rounded-lg text-semibold border-0 ring-1 ring-gray-300 ring-inset  focus:ring-inset focus:ring-sky-600 disabled:opacity-50 disabled:pointer-events-none me-2 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white  dark:focus:ring-sky-600 dark:border-0 dark:focus:border-0 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500">
+            <select id="month" name="month" class="form-input py-3 px-4 block w-full rounded-lg text-semibold border-0 ring-1 ring-gray-300 ring-inset  focus:ring-inset focus:ring-sky-600 disabled:opacity-50 disabled:pointer-events-none me-2 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white  dark:focus:ring-sky-600 dark:border-0 dark:focus:border-0 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500">
               <option selected>Month</option>
               <hr />
               {
@@ -46,7 +47,7 @@ const years = generateYears()
               }
             </select>
 
-            <select class="form-input py-3 px-4 block w-full rounded-lg text-semibold border-0 ring-1 ring-gray-300 ring-inset  focus:ring-inset focus:ring-sky-600 disabled:opacity-50 disabled:pointer-events-none me-2 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white  dark:focus:ring-sky-600 dark:border-0 dark:focus:border-0 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500">
+            <select id="year" name="year" class="form-input py-3 px-4 block w-full rounded-lg text-semibold border-0 ring-1 ring-gray-300 ring-inset  focus:ring-inset focus:ring-sky-600 disabled:opacity-50 disabled:pointer-events-none me-2 sm:text-sm sm:leading-6 dark:bg-gray-800 dark:ring-gray-700 dark:text-white  dark:focus:ring-sky-600 dark:border-0 dark:focus:border-0 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500">
               <option selected>Year</option>
               <hr />
               {
@@ -57,16 +58,36 @@ const years = generateYears()
             </select>
         </div>
         <div class="flex mt-5">
-            <input type="checkbox" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" id="relocate">
+            <input type="checkbox" id="doesExpire" name="doesExpire" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" id="relocate">
             <label for="relocate" class="text-sm text-gray-500 ms-3 dark:text-gray-400">Does not expire</label>
         </div>
       </div>
       <div class="flex justify-end items-center gap-x-2 py-3 px-4 dark:border-gray-700">
-        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-base rounded-lg font-semibold text-blue-500 hover:bg-blue-300 dark:hover:bg-[#1E293B] disabled:opacity-50 disabled:pointer-events-none transition-all ease-in-out duration-300" data-hs-overlay="#addCertificationModal">
-          Cancel
-        </button>
+        <CancelModalButton modal="#addCertificationModal"/>
         <Button type="submit">Save</Button>
       </div>
     </div>
   </div>
 </div>
+<script>
+  const doesExpire = document.getElementById('doesExpire') as HTMLInputElement | null;
+  const year = document.getElementById('year') as HTMLSelectElement | null;
+  const month = document.getElementById('month') as HTMLSelectElement | null;
+  
+  const toggle = (e: Event) => {
+      const target = e.target as HTMLInputElement;
+  
+      if (target.checked) {
+        console.log(target.checked)
+        year?.setAttribute("disabled", "true");
+        month?.setAttribute("disabled", "true");
+      } else {
+        year?.removeAttribute("disabled");
+        month?.removeAttribute("disabled");
+        console.log(target.checked)
+      }
+  };
+  
+  doesExpire?.addEventListener('change', toggle);
+  
+  </script>

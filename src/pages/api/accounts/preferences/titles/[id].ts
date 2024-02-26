@@ -1,22 +1,19 @@
 import type { APIRoute } from "astro";
 import { getFirestore, Timestamp } from "firebase-admin/firestore";
-import { app } from "../../../../firebase/server";
+import { app } from "../../../../../firebase/server";
 
 const db = getFirestore(app);
 const accounts = db.collection("UserAccount");
 
 export const POST: APIRoute = async ({ params, redirect, request }) => {
-
   const formData = await request.formData();
 
   const title = formData.get("title")?.toString();
-  const company = formData.get("company")?.toString();
-  const startDate = formData.get("startDate")?.toString();
-  const endDate = formData.get("endDate")?.toString();
+
   const id = params.id;
 
   if (!id) {
-    return new Response("Id not found", {
+    return new Response("Cannot find id", {
       status: 404,
     });
   }
@@ -26,22 +23,19 @@ export const POST: APIRoute = async ({ params, redirect, request }) => {
     const userSnapshot = await userDoc.get();
 
     if (!userSnapshot.exists) {
-      throw new Error("User Does not exist");
+      throw new Error("User not found");
     }
 
-    const experienceRef = userDoc.collection("experience");
-    const newDocRef = experienceRef.doc();
+    const titleRef = userDoc.collection("Titles");
+    const newDocRef = titleRef.doc();
     const newDocId = newDocRef.id;
-    const experience = {
+    const Title = {
       id: newDocId,
       title,
-      company,
-      startDate,
-      endDate,
       createdAt: Timestamp.now(),
     };
 
-    await newDocRef.set(experience);
+    await newDocRef.set(Title);
 
   } catch (error) {
     console.log(error);

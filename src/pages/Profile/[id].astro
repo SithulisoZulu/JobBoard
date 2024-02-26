@@ -12,10 +12,9 @@ const southAfrica = countries.find((country) => country.name === "South Africa")
 
 const { cookies } = Astro;
 const activeUser = User;
-const account =  Accounts
-const userAccount = account.filter(acc => acc.userId === activeUser?.id);
+const userAccount = Accounts.filter(acc => acc.userId === activeUser?.id);
 
-const user = userAccount[0]
+const [user] = userAccount;
 const { id } = Astro.params;
 
 if(!activeUser)
@@ -28,8 +27,6 @@ if(!activeUser)
   });
   Astro.redirect('/Signin')
 };
-
-console.log(user?.relocate_Range)
 ---
 <Layout title="JobBoard | Contact info">
     <div class="max-w-[40rem] px-4 py-10 lg:pt-20 sm:px-6 lg:px-8 lg:py-14 mx-auto mt-10 dark:text-white">
@@ -179,14 +176,11 @@ const submitOrTrackFunction = (e: Event) => {
 relocate?.addEventListener('change', submitOrTrackFunction);
 const relocate_Range = document.getElementById('relocate_Range') as HTMLInputElement | null;
 
-// Check if the checkbox element exists
 if (relocate_Range) {
-    // Add event listener for change event
     relocate_Range.addEventListener('change', function() {
         const locations = document.getElementById('locations') as HTMLElement | null;
         const rel_location = document.getElementById('rel_location') as HTMLElement | null;
-        
-        // If checkbox is checked, remove the 'hidden' class, otherwise add it
+
         if (relocate_Range.checked && locations) {
             locations.classList.remove('hidden');
             if(rel_location ) rel_location.innerHTML = 'Willing to relocate only around me'
@@ -196,5 +190,4 @@ if (relocate_Range) {
         }
     });
 }
-
 </script>

@@ -1,5 +1,5 @@
 ---
-import { isEmailValid } from '../../utils/EmailValidation';
+
 import Button from '@components/ui/Button.astro';
 import Input from '@components/ui/Input.astro';
 
@@ -9,11 +9,6 @@ export function client() {
   const submitButton = document.getElementById('submitButton') as HTMLButtonElement;
 
 
-    emailInput.addEventListener('input', () => {
-      const email = emailInput.value;
-      const isValid = isEmailValid(email);
-      submitButton.disabled = !isValid;
-    });
 
 }
 
