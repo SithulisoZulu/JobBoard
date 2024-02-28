@@ -4,6 +4,7 @@ import Input from "@components/ui/Input.astro";
 import CancelModalButton from "./CancelModalButton.astro";
 
 const { id } = Astro.params;
+const { user } = Astro.props;
 ---
 <div id="addJobTitlesModal" class="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">
   <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all lg:max-w-4xl lg:w-full m-3 lg:mx-auto items-center">
@@ -21,6 +22,13 @@ const { id } = Astro.params;
         <div class="p-4 overflow-y-auto">
           <label for="title" class="block text-sm mb-2 dark:text-white font-bold">Job Title <span class="text-rose-700">*</span></label>
           <Input id="title" name="title" placeholder='Example: Software Developer' required autofocus />
+          <div class="flex flex-row">
+            {
+              user?.titles.map((title: any, i: number) => (
+                <p class="mt-2 text-sm text-gray-500 dark:text-white">{i + 1}. {title.title}</p>
+              ))
+            } 
+          </div>
         </div>
 
         <div class="flex justify-end items-center gap-x-2 py-3 px-4 dark:border-gray-700">

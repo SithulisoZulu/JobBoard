@@ -81,13 +81,11 @@ const toggle = (e: Event) => {
     const target = e.target as HTMLInputElement;
 
     if (target.checked) {
-      console.log(target.checked)
       year?.setAttribute("disabled", "true");
       month?.setAttribute("disabled", "true");
     } else {
       year?.removeAttribute("disabled");
       month?.removeAttribute("disabled");
-      console.log(target.checked)
     }
 };
 

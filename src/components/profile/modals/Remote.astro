@@ -3,6 +3,7 @@ import Button from "@components/ui/Button.astro";
 import CancelModalButton from "@components/profile/modals/CancelModalButton.astro"
 
 const { id } = Astro.params;
+const { user } = Astro.props;
 ---
 
 <div id="addRemoteModal" class="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">
@@ -27,19 +28,19 @@ const { id } = Astro.params;
       <div class="p-4 overflow-y-auto">
         <form action=`/api/accounts/preferences/remote/${id}` method="post">            
           <div class="flex">
-            <input type="checkbox" id="remote" name="remote" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" id="relocate">
+            <input type="checkbox" id="remote" name="remote" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" id="relocate" checked={user?.remote[0]?.remote === true ? true : false}>
             <label for="remote" class="text-sm text-gray-500 ms-3 dark:text-gray-400">Remote</label>
           </div>
           <div class="flex mt-5">
-            <input type="checkbox" id="hybrid" name="hybrid" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" id="relocate">
+            <input type="checkbox" id="hybrid" name="hybrid" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" id="relocate" checked={user?.remote[0]?.hybrid === true ? true : false}>
             <label for="hybrid" class="text-sm text-gray-500 ms-3 dark:text-gray-400">Hybrid work</label>
           </div>
           <div class="flex mt-5">
-            <input type="checkbox" id="inPerson" name="inPerson" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" id="relocate">
+            <input type="checkbox" id="inPerson" name="inPerson" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" id="relocate" checked={user?.remote[0]?.inPerson === true ? true : false}>
             <label for="inPerson" class="text-sm text-gray-500 ms-3 dark:text-gray-400">In-person</label>
           </div>
           <div class="flex mt-5">
-            <input type="checkbox" id="tempRemote" name="tempRemote" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" id="relocate">
+            <input type="checkbox" id="tempRemote" name="tempRemote" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" id="relocate" checked={user?.remote[0]?.tempRemote === true ? true : false}>
             <label for="tempRemote" class="text-sm text-gray-500 ms-3 dark:text-gray-400">Temporarily remote</label>
           </div>
           <div class="flex justify-end items-center gap-x-2 py-3 px-4 dark:border-gray-700">

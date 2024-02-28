@@ -3,6 +3,7 @@ import Button from "@components/ui/Button.astro";
 import CancelModalButton from "@components/profile/modals/CancelModalButton.astro"
 
 const { id } = Astro.params;
+const { user } = Astro.props;
 ---
 
 <div id="addJobTypesModal" class="hs-overlay hidden w-full h-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">
@@ -27,35 +28,35 @@ const { id } = Astro.params;
       <div class="p-4 overflow-y-auto">
         <form action=`/api/accounts/preferences/types/${id}` method="post">            
           <div class="flex">
-            <input type="checkbox" id="Full-time" name="Full-time" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" >
+            <input type="checkbox" id="Full-time" name="Full-time" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" checked={user?.types[0]?.fullTime === true ? true : false}>
             <label for="Full-time" class="text-sm text-gray-500 ms-3 dark:text-gray-400">Full-time</label>
           </div>
           <div class="flex mt-5">
-            <input type="checkbox" id="Part-time" name="Part-time" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" >
+            <input type="checkbox" id="Part-time" name="Part-time" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" checked={user?.types[0]?.partTime === true ? true : false}>
             <label for="Part-time" class="text-sm text-gray-500 ms-3 dark:text-gray-400">Part-time</label>
           </div>
           <div class="flex mt-5">
-            <input type="checkbox" id="inPerson" name="inPerson" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" >
+            <input type="checkbox" id="inPerson" name="inPerson" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" checked={user?.types[0]?.permanent === true ? true : false}>
             <label for="inPerson" class="text-sm text-gray-500 ms-3 dark:text-gray-400">Permanent</label>
           </div>
           <div class="flex mt-5">
-            <input type="checkbox" id="temporary" name="temporary" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" >
+            <input type="checkbox" id="temporary" name="temporary" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" checked={user?.types[0]?.temporary === true ? true : false}>
             <label for="temporary" class="text-sm text-gray-500 ms-3 dark:text-gray-400">Temporary</label>
           </div>
           <div class="flex mt-5">
-            <input type="checkbox" id="Temp-perm" name="Temp-perm" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" >
+            <input type="checkbox" id="Temp-perm" name="Temp-perm" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" checked={user?.types[0]?.tempPerm === true ? true : false}>
             <label for="Temp-perm" class="text-sm text-gray-500 ms-3 dark:text-gray-400">Temp to perm</label>
           </div>
           <div class="flex mt-5">
-            <input type="checkbox" id="Learnership" name="Learnership" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" >
+            <input type="checkbox" id="Learnership" name="Learnership" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" checked={user?.types[0]?.learnership === true ? true : false}>
             <label for="Learnship" class="text-sm text-gray-500 ms-3 dark:text-gray-400">Learnership</label>
           </div>
           <div class="flex mt-5">
-            <input type="checkbox" id="Internship" name="Internship" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" >
+            <input type="checkbox" id="Internship" name="Internship" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" checked={user?.types[0]?.internship === true ? true : false}>
             <label for="Internship" class="text-sm text-gray-500 ms-3 dark:text-gray-400">Internship</label>
           </div>
           <div class="flex mt-5">
-            <input type="checkbox" id="Graduate" name="Graduate" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" >
+            <input type="checkbox" id="Graduate" name="Graduate" class="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 p-2 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800 cursor-pointer" checked={user?.types[0]?.graduate === true ? true : false}>
             <label for="Graduate" class="text-sm text-gray-500 ms-3 dark:text-gray-400">Graduate</label>
           </div>
           <div class="flex justify-end items-center gap-x-2 py-3 px-4 dark:border-gray-700">

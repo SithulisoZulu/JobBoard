@@ -31,16 +31,23 @@ export const POST: APIRoute = async ({ params, redirect, request }) => {
       throw new Error("User not found");
     };
 
-    const ReadyToWorkRef = userDoc.collection("ReadyToWork");
-    const newDocRef      = ReadyToWorkRef.doc();
-    const newDocId       = newDocRef.id;
-    const Remote         = {
-      id         : newDocId,
-      ReadyToWork: ReadyToWork,
-      createdAt  : Timestamp.now(),
-    };
-
-    await newDocRef.set(Remote);
+    const readyToWorkRef = userDoc.collection("ReadyToWork");
+    const readyToWorkSnapshot = await readyToWorkRef.get();
+    
+    if(readyToWorkSnapshot.empty){
+      const newDocRef = readyToWorkRef.doc();
+      await newDocRef.set({
+        id         : newDocRef.id,
+        ReadyToWork: ReadyToWork,
+        createdAt  : Timestamp.now(),
+      })
+    }else {
+      const readyToWorkDoc = readyToWorkSnapshot.docs[0];
+      await readyToWorkDoc.ref.update({
+        ReadyToWork: ReadyToWork,
+        updatedAt  : Timestamp.now(),
+      })
+    }
 
   } catch (error) {
     console.log(error);

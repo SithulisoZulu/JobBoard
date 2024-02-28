@@ -29,42 +29,42 @@ export const POST: APIRoute = async ({ params, redirect, request }) => {
 
   if (FullTime === "on") {
     fullTime = true
-  }else{ fullTime = false}
+  }else{ fullTime = false};
 
   if (PartTime === "on") {
     partTime = true
-  }else{ partTime = false}
+  }else{ partTime = false};
 
   if (Permanent === "on") {
     permanent = true
-  }else{ permanent = false}
+  }else{ permanent = false};
 
   if (Temporary === "on") {
     temporary = true
-  }else{ temporary = false}
+  }else{ temporary = false};
+
   if (TempPerm === "on") {
     tempPerm = true
-  }else{ tempPerm = false}
+  }else{ tempPerm = false};
 
   if (Learnership === "on") {
     learnership = true
-  }else{ learnership = false}
+  }else{ learnership = false};
 
   if (Internship === "on") {
     internship = true
-  }else{ internship = false}
+  }else{ internship = false};
 
   if (Graduate === "on") {
     graduate = true
-  }else{ graduate = false}
-    
-    
-    if (!id) {
-        return new Response("Cannot find id", {
-          status: 404,
-        });
-    };
-    
+  }else{ graduate = false};
+  
+  if (!id) {
+    return new Response("Cannot find id", {
+      status: 404,
+    });
+  };
+  
   try {
     const userDoc      = accounts.doc(id);
     const userSnapshot = await userDoc.get();
@@ -74,23 +74,36 @@ export const POST: APIRoute = async ({ params, redirect, request }) => {
     };
 
     const typeRef = userDoc.collection("Types");
-    const newDocRef = typeRef.doc();
-    const newDocId  = newDocRef.id;
-    const Remote    = {
-      id         : newDocId,
-      fullTime   : fullTime,
-      partTime   : partTime,
-      permanent  : permanent,
-      temporary  : temporary,
-      tempPerm   : tempPerm,
-      learnership: learnership,
-      internship : internship,
-      graduate   : graduate,
-      createdAt  : Timestamp.now(),
-    };
-
-    await newDocRef.set(Remote);
-
+    const typeSnapshot = await typeRef.get();
+    
+    if(typeSnapshot.empty){
+      const newDocRef = typeRef.doc();
+      await newDocRef.set({
+        id         : newDocRef.id,
+        fullTime   : fullTime,
+        partTime   : partTime,
+        permanent  : permanent,
+        temporary  : temporary,
+        tempPerm   : tempPerm,
+        learnership: learnership,
+        internship : internship,
+        graduate   : graduate,
+        createdAt  : Timestamp.now(),
+      })
+    } else {
+      const typeDoc = typeSnapshot.docs[0];
+      await typeDoc.ref.update({
+        fullTime   : fullTime,
+        partTime   : partTime,
+        permanent  : permanent,
+        temporary  : temporary,
+        tempPerm   : tempPerm,
+        learnership: learnership,
+        internship : internship,
+        graduate   : graduate,
+        updatedAt  : Timestamp.now(),
+      })
+    }
   } catch (error) {
     console.log(error);
     return new Response("Something went wrong", {

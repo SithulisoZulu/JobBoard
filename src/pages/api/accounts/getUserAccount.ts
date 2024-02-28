@@ -1,6 +1,6 @@
 import { app } from "../../../firebase/server";
 import { Timestamp, getFirestore } from "firebase-admin/firestore";
-import type { Education, Experience, Language, License, Skills, Certificate, Account, Remote, Titles, Types, Salary } from "@interfaces/account";
+import type { Education, Experience, Language, License, Skills, Certificate, Account, Remote, Titles, Types, Salary, References, ReadyToWork } from "@interfaces/account";
 
 const db = getFirestore(app);
 const accountRef = db.collection("UserAccount");
@@ -40,14 +40,14 @@ for (const account of Accounts) {
   account.education = educationSnapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
-  })) as Experience[];
+  })) as Education[];
 };
 
 //User languages
 for (const account of Accounts) {
   const langueRef = db.collection("UserAccount").doc(account.id).collection("Languages");
   const languesSnapshot = await langueRef.get();
-  account.langues = languesSnapshot.docs.map((doc) => ({
+  account.languages = languesSnapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),
   })) as Language[];
@@ -111,6 +111,26 @@ for (const account of Accounts) {
     id: doc.id,
     ...doc.data(),
   })) as Salary[];
+}
+
+//User References
+for (const account of Accounts) {
+  const referencesRef = db.collection("UserAccount").doc(account.id).collection("References");
+  const referencesSnapshot = await referencesRef.get();
+  account.references = referencesSnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as References[];
+}
+
+//User References
+for (const account of Accounts) {
+  const readyToWorkRef = db.collection("UserAccount").doc(account.id).collection("ReadyToWork");
+  const readyToWorkSnapshot = await readyToWorkRef.get();
+  account.readyToWork = readyToWorkSnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as ReadyToWork[];
 }
 
 //#endregion logic

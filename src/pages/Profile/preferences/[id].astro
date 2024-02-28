@@ -2,69 +2,117 @@
 import Layout from "@layouts/Layout.astro";
 import PageHeader from "@components/profile/PageHeader.astro";
 import ProfileContainer from "@containers/ProfileContainer.astro";
+import { activeUser } from "src/utils/activeUser";
+
+const  user  = activeUser()
 ---
 
 <Layout title="Job Search | Preferences">
     <div class="max-w-[40rem] px-4 py-10 lg:pt-20 sm:px-6 lg:px-8 lg:py-14 mx-auto mt-10 dark:text-white">
         <PageHeader title="Preferences" subtitle="Tell us the job details you’re interested in to get better recommendations across JobBoard." href="/Profile" />
-
         <div class="mt-5">
-            <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer" data-hs-overlay="#addRemoteModal"
+            <div class={`${user?.remote.length > 0 ? '': 'border-b'}  ${user?.remote.length > 0 ? '': 'mb-3'} ${user?.remote.length > 0 ? '': 'py-3'} border-t p-1  mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active  -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer`} data-hs-overlay="#addRemoteModal"
             >
                 <div class="flex flex-row items-center w-full justify-between">
                     <div class="flex flex-col text-start">
                         <div class="flex flex-row items-center">
                             <i class="fa fa-home" aria-hidden="true"></i>   
-                            <h1 class="font-bold mb-1 ms-4">Remote</h1>
+                            <h1 class="font-bold mb-1 ms-4">Remote {user?.remote.length > 0 ? (<span class="text-green-700 text-xs">Added</span>) : ''}</h1>
                         </div>
                     </div>
                     <div>
-                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        {user?.remote.length > 0 ? (<i class="fa fa-edit" aria-hidden="true"></i>) : (<i class="fa fa-plus" aria-hidden="true"></i>)} 
                     </div>
                 </div>
+                {
+                    user?.remote.length > 0 ? (
+                        <div class="text-sm pl-10 mt-2">
+                            <p class={`text-sm mb-1 ${user?.remote?.[0]?.tempRemote ? '' : "hidden"}`}>Temporarily remote</p>
+                            <p class={`text-sm mb-1 ${user?.remote?.[0]?.remote ? '' : "hidden"}`}>Remote work</p>
+                            <p class={`text-sm mb-1 ${user?.remote?.[0]?.hybrid ? '' : "hidden"}`}>Hybrid work</p>
+                            <p class={`text-sm mb-1 ${user?.remote?.[0]?.inPerson ? '' : "hidden"}`}>In-person</p>
+                        </div>
+                    ) : ''
+                }
             </div>
-            <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer" data-hs-overlay="#addJobTitlesModal"
+            <div class={`${user?.titles.length > 0 ? '': 'border-b'}  ${user?.titles.length > 0 ? '': 'mb-3'} ${user?.titles.length > 0 ? '': 'py-3'} border-t p-1  mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active  -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer`}  data-hs-overlay="#addJobTitlesModal"
             >
                 <div class="flex flex-row items-center w-full justify-between">
                     <div class="flex flex-col text-start">
                         <div class="flex flex-row items-center">
                             <i class="fa fa-user" aria-hidden="true"></i>  
-                            <h1 class="font-bold mb-1 ms-4">Job titles</h1>
+                            <h1 class="font-bold mb-1 ms-4">Job titles {user?.titles.length > 0 ? (<span class="text-green-700 text-xs">Added</span>) : ''}</h1>
                         </div>
                     </div>
                     <div>
-                    <i class="fa fa-plus" aria-hidden="true"></i>
+                        {user?.titles.length > 0 ? (<i class="fa fa-edit" aria-hidden="true"></i>) : (<i class="fa fa-plus" aria-hidden="true"></i>)}
                     </div>
                 </div>
+                {
+                    user?.titles.length > 0 ? (
+                        <div class="text-sm pl-9 mt-2">
+                            {                            
+                                user?.titles.map((title) => (
+                                    <p class="text-sm mb-1">{title.title}</p>
+                                ))
+                            }
+                        </div>
+                    ) : ''
+                }
             </div>
-            <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer" data-hs-overlay="#addJobTypesModal"
+            <div class={`${user?.types.length > 0 ? '': 'border-b'}  ${user?.types.length > 0 ? '': 'mb-3'} ${user?.types.length > 0 ? '': 'py-3'} border-t p-1  mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active  -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer`} data-hs-overlay="#addJobTypesModal"
             >
                 <div class="flex flex-row items-center w-full justify-between">
                     <div class="flex flex-col text-start">
                         <div class="flex flex-row items-center">
                             <i class="fa fa-briefcase" aria-hidden="true"></i> 
-                            <h1 class="font-bold mb-1 ms-4">Job types</h1>
+                            <h1 class="font-bold mb-1 ms-4">Job types {user?.types.length > 0 ? (<span class="text-green-700 text-xs">Added</span>) : ''}</h1>
                         </div>
                     </div>
                     <div>
-                    <i class="fa fa-plus" aria-hidden="true"></i>
+                        {user?.types.length > 0 ? (<i class="fa fa-edit" aria-hidden="true"></i>) : (<i class="fa fa-plus" aria-hidden="true"></i>)}
                     </div>
                 </div>
+                {
+                    user?.types.length > 0 ? (
+                        <div class="text-sm pl-10 mt-2">
+                            <p class={`text-sm mb-1 ${user?.types?.[0]?.fullTime ? '' : "hidden"}`}>Full-time</p>
+                            <p class={`text-sm mb-1 ${user?.types?.[0]?.graduate ? '' : "hidden"}`}>Graduate</p>
+                            <p class={`text-sm mb-1 ${user?.types?.[0]?.internship ? '' : "hidden"}`}>Internship</p>
+                            <p class={`text-sm mb-1 ${user?.types?.[0]?.learnership ? '' : "hidden"}`}>Learnership</p>
+                            <p class={`text-sm mb-1 ${user?.types?.[0]?.partTime ? '' : "hidden"}`}>Part-time</p>
+                            <p class={`text-sm mb-1 ${user?.types?.[0]?.permanent ? '' : "hidden"}`}>Permanent</p>
+                            <p class={`text-sm mb-1 ${user?.types?.[0]?.tempPerm ? '' : "hidden"}`}>Temporary to Permanent</p>
+                            <p class={`text-sm mb-1 ${user?.types?.[0]?.temporary ? '' : "hidden"}`}>Temporary</p>
+                        </div>
+                    ) : ''
+                }
             </div>
-            <div class="border-b border-t p-1 py-3 mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active mb-3 -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer"
+            <div class={`${user?.salary.length > 0 ? '': 'border-b'}  ${user?.salary.length > 0 ? '': 'mb-3'} ${user?.salary.length > 0 ? '': 'py-3'} border-t p-1  mt-0 before:inset-0 dark:border-gray-700 dark:before:border-gray-700 dark:before:hover:border-blue-500  dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 active  -z-2 transition-all ease-in-out duration-300 hover:bg-blue-100 hover:border-blue-400  dark:hover:bg-[#1E293B] cursor-pointer`}
             data-hs-overlay="#addMinSalaryModal"
             >
                 <div class="flex flex-row items-center w-full justify-between">
                     <div class="flex flex-col text-start">
                         <div class="flex flex-row items-center">
                             <i class="bi bi-cash-stack"></i>  
-                            <h1 class="font-bold mb-1 ms-4">Minimum salary</h1>
+                            <h1 class="font-bold mb-1 ms-4">Minimum salary {user?.salary.length > 0 ? (<span class="text-green-700 text-xs">Added</span>) : ''}</h1>
                         </div>
                     </div>
                     <div>
-                    <i class="fa fa-plus" aria-hidden="true"></i>
+                        {user?.salary.length > 0 ? (<i class="fa fa-edit" aria-hidden="true"></i>) : (<i class="fa fa-plus" aria-hidden="true"></i>)}
                     </div>
                 </div>
+                {
+                    user?.salary.length > 0 ? (
+                        <div class="text-sm pl-9 mt-2">
+                            {                            
+                                user?.salary.map((salary) => (
+                                    <p class="text-sm mb-1">R{salary.salary}  {salary.period}</p>
+                                ))
+                            }
+                        </div>
+                    ) : ''
+                }
             </div>
         </div>
     </div>

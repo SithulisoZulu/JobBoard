@@ -4,6 +4,7 @@ import Input from "@components/ui/Input.astro";
 import CancelModalButton from "./CancelModalButton.astro";
 
 const { id } = Astro.params;
+const { user } = Astro.props
 
 function arrayRange(start: number, stop: number, step = 1): number[] {
   return Array.from(
@@ -41,6 +42,13 @@ const arr = arrayRange(0, 99);
               ))
             }
           </select>
+          <div class="flex flex-row">
+            {
+              user?.skills.map((skill: any, i: number) => (
+                <p class="mt-2 text-sm text-gray-500 dark:text-white mr-2">{i + 1}. {skill.skill}</p>
+              ))
+            } 
+          </div>
         </div>
         <div class="flex justify-end items-center gap-x-2 py-3 px-4 dark:border-gray-700">
           <CancelModalButton modal="#addSkillModal"/>

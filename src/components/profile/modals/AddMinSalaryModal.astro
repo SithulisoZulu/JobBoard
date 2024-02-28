@@ -4,6 +4,7 @@ import Input from "@components/ui/Input.astro";
 import CancelModalButton from "./CancelModalButton.astro";
 
 const { id } = Astro.params;
+const { user } = Astro.props
 
 const  periods = [
     "Per hour", "Per day", "Per week", "Per month", "Per year"
@@ -39,6 +40,13 @@ const  periods = [
                         }
                       </select>
                 </div>
+            </div>
+            <div class="mt-4">
+              {
+                user?.salary.map((sal: any) => (
+                  <p class="text sm text-gray-500 dark:text-white">R{sal.salary} - {sal.period}</p>
+                ))
+              }
             </div>
         </div>
 

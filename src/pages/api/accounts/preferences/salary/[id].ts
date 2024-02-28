@@ -27,18 +27,27 @@ export const POST: APIRoute = async ({ params, redirect, request }) => {
       throw new Error("User not found");
     }
 
-    const titleRef = userDoc.collection("Salary");
-    const newDocRef = titleRef.doc();
-    const newDocId = newDocRef.id;
-    const Title = {
-      id: newDocId,
+    const salaryRef = userDoc.collection("Salary");
+    const salarySnapshot = await salaryRef.get();
+
+    if (salarySnapshot.empty) {
+     const newDocRef = salaryRef.doc();
+     await newDocRef.set({
+      id: newDocRef.id,
       salary,
       period,
       createdAt: Timestamp.now(),
-    };
-
-    await newDocRef.set(Title);
-
+     })
+    }else {
+      const salaryDoc = salarySnapshot.docs[0];
+      
+      await salaryDoc.ref.update({
+        salary,
+        period,
+        updatedAt: Timestamp.now(),
+      })
+    }
+    
   } catch (error) {
     console.log(error);
     return new Response("Something went wrong", {

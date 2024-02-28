@@ -17,26 +17,23 @@ export interface Experience {
 
 //user Education interface
 export interface Education {
-  id       : string;
-  title    : string;
-  company  : string;
-  startDate: Timestamp;
-  endDate  : Timestamp;
+  id            : string;
+  field_of_study: string;
+  level         : string;
 }
 
 //user Language interface
 export interface Language {
-  id       : string;
-  title    : string;
-  company  : string;
-  startDate: Timestamp;
-  endDate  : Timestamp;
+  id         : string;
+  language   : string;
+  Proficiency: string;
+  createdAt  : Timestamp;
 }
 
 //user licenses interface
 export interface License {
   id       : string;
-  license  : string;
+  License  : string;
   expiry   : string;
   month    : string;
   year     : string;
@@ -45,12 +42,12 @@ export interface License {
 
 //user certificates interface
 export interface Certificate {
-  id       : string;
-  license  : string;
-  expiry   : string;
-  month    : string;
-  year     : string;
-  createdAt: Timestamp;
+  id         : string;
+  certificate: string;
+  expiry     : string;
+  month      : string;
+  year       : string;
+  createdAt  : Timestamp;
 }
 
 //User Remote interface
@@ -72,16 +69,16 @@ export interface Titles {
 
 //User Types interface
 export interface Types {
-  id         : string;
-  fullTime   : boolean;
-  graduate   : boolean;
-  internship : boolean;
-  learnership: boolean;
-  partTime   : boolean;
-  permanent  : boolean;
-  tempPerm   : boolean;
-  temporary  : boolean;
-  createdAt  : Timestamp;
+id         : string;
+fullTime   : boolean;
+graduate   : boolean;
+internship : boolean;
+learnership: boolean;
+partTime   : boolean;
+permanent  : boolean;
+tempPerm   : boolean;
+temporary  : boolean;
+createdAt  : Timestamp;
 }
 
 //User Types interface
@@ -90,6 +87,22 @@ export interface Salary {
   period   : string;
   salary   : string;
   createdAt: Timestamp;
+}
+
+//User Types interface
+export interface References {
+  id       : string;
+  email    : string;
+  name     : string;
+  number   : string;
+  createdAt: Timestamp;
+}
+
+//User Types ReadyToWork
+export interface ReadyToWork {
+  id         : string;
+  ReadyToWork: boolean;
+  createdAt  : Timestamp;
 }
 
 export interface Account {
@@ -109,11 +122,13 @@ export interface Account {
   skills        : Skills[];
   experience    : Experience[];
   education     : Education[];
-  langues       : Language[];
+  languages     : Language[];
   licenses      : License[];
   certificates  : Certificate[];
   remote        : Remote[];
   titles        : Titles[];
   types         : Types[];
   salary        : Salary[];
+  references    : References[];
+  readyToWork   : ReadyToWork[];
 }

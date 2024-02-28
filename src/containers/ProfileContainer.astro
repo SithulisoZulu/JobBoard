@@ -10,16 +10,19 @@ import JobTitlesModal from "@components/profile/modals/JobTitlesModal.astro";
 import JobTypesModal from "@components/profile/modals/JobTypesModal.astro";
 import AddMinSalaryModal from  "@components/profile/modals/AddMinSalaryModal.astro";
 import AddReferencesModal from "@components/profile/modals/AddReferencesModal.astro";
+import { activeUser } from "src/utils/activeUser"
+
+const  user  = activeUser()
 ---
 
-<AddSkillModal />
-<AddExperienceModal />
-<AddEducationModal />
-<AddLicencesModal />
-<AddCertificationsModal />
-<AddLanguagesModal />
-<Remote />
-<JobTitlesModal />
-<JobTypesModal />
-<AddMinSalaryModal />
-<AddReferencesModal />
+<AddSkillModal {user} />
+<AddExperienceModal {user} />
+<AddEducationModal {user} />
+<AddLicencesModal {user} />
+<AddCertificationsModal {user} />
+<AddLanguagesModal {user} />
+<Remote {user} />
+<JobTitlesModal {user} />
+<JobTypesModal {user} />
+<AddMinSalaryModal {user} />
+<AddReferencesModal {user} />

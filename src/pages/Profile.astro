@@ -1,17 +1,12 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import { User } from 'src/utils/getUser';
-import { Accounts } from '../pages/api/accounts/getUserAccount';
+import { activeUser } from "src/utils/activeUser"
 
 const { cookies } = Astro;
-const activeUser = User;
-const accounts =  Accounts
-const account = accounts.filter(acc => acc.userId.toLowerCase() === activeUser?.id.toLowerCase());
-const user = account[0]
+const  user  = activeUser()
 
-console.log(user); 
-
-if(!activeUser)
+if(!User)
 {
 	cookies.delete("sb-access-token", {
     path: "/",
@@ -42,7 +37,7 @@ const address =  `${user?.street}, ${user?.city}, 🇿🇦`;
         <div class="flex flex-row items-center w-full justify-between">
           <div class="flex flex-col gap-3 text-semibold dark:text-white/65">
             <div class="flex items-center">
-              <i class="fa fa-envelope icon" aria-hidden="true"></i> <span class="ms-5 ">{activeUser?.email}</span>
+              <i class="fa fa-envelope icon" aria-hidden="true"></i> <span class="ms-5 ">{User?.email}</span>
             </div>
             <div class="flex items-center">
               <i class="fa fa-phone icon" aria-hidden="true"></i><span class="ms-5 ">{`${user?.number ? user?.number : 'Please add a contact number'}`}</span>
